@@ -39,6 +39,19 @@ body {
     color: white;
 }
 
+.btn-outline-black {
+    background: white;
+    color: black !important; /* important overrides link colors for <a> elements */
+    border: 2px solid black;
+}
+
+.btn-outline-black:hover,
+.btn-outline-black:active,
+.btn-outline-black:focus {
+    background: black;
+    color: white !important;
+}
+
 .browse-now-button:hover,
 .browse-now-button:active,
 .browse-now-button:focus,
