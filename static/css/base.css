@@ -28,15 +28,17 @@ body {
 
 
 .browse-now-button {
-    background: black;
-    color: white;
+    background: #94a1a7;
+    color: black !important;
     min-width: 200px;
     font-size: .9rem;
+    font-weight: 600;
+    border: #000 solid 1px;
 }
 
 .btn-black {
-    background: black;
-    color: white;
+    background: #94a1a7;
+    color: black;
 }
 
 .btn-outline-black {
@@ -60,15 +62,23 @@ body {
 .btn-black:focus {
     background: white;
     color: #000;
-    border: solid 2px #000;
+    border: solid 1px #000;
 }
 
 .text-black {
-    color: #000 !important;
+    color: black !important;
+}
+
+.text-grey {
+    color: #687377;
 }
 
 .border-black {
     border: 1px solid black !important;
+}
+
+.text-info {
+    color:#000 !important;
 }
 
 .bg-black {
@@ -81,16 +91,19 @@ a.category-badge > span.badge:hover {
 }
 
 .btt-button {
-    height: 42px;
+    height: 42px; 
     width: 42px;
     position: fixed;
     bottom: 10px;
     right: 10px;
 }
 
-.btt-limk {
+.btt-link,
+.update-link,
+.remove-item {
     cursor: pointer;
 }
+
 
 /* -------------------------------- Media Queries */
 
