@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bag_tools %}
 
 {% block page_header %}
 <div class="container header-container">
@@ -46,7 +47,7 @@
                             <p class="my-0">£{{ item.product.price  }}</p>
                         </td>
                         <td class="py-3 w-25">
-                            <form class="form update-form" method="POST" action="">
+                            <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <!-- Input group containing quantity input -->
@@ -73,10 +74,10 @@
                                 </div>
                             </form>
                             <a class="update-link text-info"><small><strong>Update</strong></small></a>
-                            <a class="remove-item text-danger float-right"><small><strong>Remove</strong></small></a>
+                            <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}"><small><strong>Remove</strong></small></a>
                         </td>
                         <td class="py-3">
-                            <p class="my-0">£{{ item.product.price }}</p>
+                            <p class="my-0">£{{ item.product.price|calc_subtotal:item.quantity }}</p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -140,13 +141,14 @@
     // Remove item and reload on click
     $('.remove-item').click(function(e) {
         var csrfToken = "{{ csrf_token }}";
-        var url = `/bag/remove/${itemId}`;
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var url = `/bag/remove/${itemId}/`;
         var data = {'csrfmiddlewaretoken': csrfToken};
 
         $.post(url, data)
          .done(function() {
              location.reload();
-         });
+        });
     })
 </script>
 {% endblock %}
