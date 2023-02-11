@@ -1,4 +1,4 @@
-# ![TheEthicalWineCellar logo](/media/tewc_logo2.jpg) The English Wine Cellar 
+# ![TheEthicalWineCellar logo](/media/tewc_logo3.jpg) The English Wine Cellar 
 
 ![am I responsive] Image
 
