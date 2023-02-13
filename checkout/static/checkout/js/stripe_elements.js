@@ -56,6 +56,9 @@ form.addEventListener('submit', function (ev) {
         'disabled': true
     });
     $('#submit-button').attr('disabled', true);
+    // Triggers the overlay and spinner icon and fades
+    $('#payment-form').fadeToggle(100);
+    $('#loading-overlay').fadeToggle(100);
 
     // Sends the card information securely to Stripe
     stripe.confirmCardPayment(clientSecret, {
@@ -71,6 +74,8 @@ form.addEventListener('submit', function (ev) {
                 </span>
                 <span>${result.error.message}</span>`;
             $(errorDiv).html(html);
+            $('#payment-form').fadeToggle(100);
+            $('#loading-overlay').fadeToggle(100);
             card.update({
                 'disabled': false
             });
