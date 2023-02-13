@@ -1,4 +1,4 @@
-# ![TheEthicalWineCellar logo](/media/tewc_logo3.jpg) The English Wine Cellar 
+# ![TheEthicalWineCellar logo](/media/tewc_logo.jpg) The English Wine Cellar 
 
 ![am I responsive] Image
 
@@ -9,7 +9,7 @@ In the past, English wine was thought of as being below the standards of Europea
 
 All of this has changed in recent years, partly due to customer perception and the emphasis on buying local by ethically minded consumers in order to contribute to a healthy environment.
 
-Britains changing climate and knowledgeable winemakers has meant that the UK can now produce good wine and compete with their continental neighbours.
+Britain's changing climate and knowledgeable winemakers has meant that the UK can now produce good wine and compete with their continental neighbours.
 
 The live website can be found [here](deployed weblink)
 # Contents
