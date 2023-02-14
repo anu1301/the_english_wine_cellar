@@ -29,6 +29,7 @@ def checkout(request):
             'county': request.POST['county'],
             'postcode': request.POST['postcode'],
         }
+
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save()
@@ -72,7 +73,7 @@ def checkout(request):
                 request, 'There is nothing in your basket at the moment.')
             # prevents manual access to URL by typing /checkout
             return redirect(reverse('products'))
-
+        
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
         stripe_total = round(total * 100)
@@ -86,7 +87,7 @@ def checkout(request):
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
-             Have you forgotten to set it in your environment? ')
+             Have you forgotten to set it in your environment?')
 
     template = 'checkout/checkout.html'
     context = {
