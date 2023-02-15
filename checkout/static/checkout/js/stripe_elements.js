@@ -62,9 +62,9 @@ form.addEventListener('submit', function (ev) {
 
 
     var saveInfo = Boolean($('#id-save-info').attr('checked'));
-    var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-    var postalData = {
-        'csrfmiddlewaretoken': csrf_token,
+    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    var postData = {
+        'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
         'save_info': saveInfo,
     }
@@ -82,8 +82,8 @@ form.addEventListener('submit', function (ev) {
                         line1: $.trim(form.street_address1.value),
                         line2: $.trim(form.street_address2.value),
                         city: $.trim(form.town_or_city.value),
-                        country: $.trim(form.country.value),
                         state: $.trim(form.county.value),
+                        country: $.trim(form.country.value),
                     }
                 }
             },
@@ -96,6 +96,7 @@ form.addEventListener('submit', function (ev) {
                 city: $.trim(form.town_or_city.value),
                 state: $.trim(form.county.value),
                 postal_code: $.trim(form.postcode.value),
+                country: $.trim(form.country.value),
             }
         },
     }).then(function (result) {
