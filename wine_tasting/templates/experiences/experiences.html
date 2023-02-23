@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <div class="row my-5">
+        <div class="col">
+          {{ experiences }}
+        </div>
+
+    </div>
+</div>
+<div class="container my-5">
+    <div class="row my-5">
+        <div class="col">
+            Contact details
+        </div>
+        <div class="col">
+            Location map
+        </div>
+    </div>
+</div>
+{% endblock %}
