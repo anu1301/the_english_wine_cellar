@@ -46,13 +46,11 @@
                 <a href="{% url 'products' %}?category=award_winners,mixed_cases,offers" class="dropdown-item">All Specials</a>
             </div>
         </li>
-
+        <!-- Link to wine tasting/experience page -->
         <li class="nav-item">
-            <div>
-            <a class="logo-font font-weight-bold nav-link text-black ml-5" href="#" id="wine_tasting-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+            <a class="logo-font font-weight-bold nav-link text-black ml-5" href="{% url 'experiences' %}" id="wine_tasting-link" aria-expanded="false" >
                 Wine Tasting
             </a>
-        </div>
           </li>
     </ul>
 </div>

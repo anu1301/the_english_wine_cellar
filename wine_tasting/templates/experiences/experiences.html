@@ -8,13 +8,65 @@
     </div>
 </div>
 {% endblock %}
+
 {% block content %}
+<div class="container-fluid">
+    <div class="row h-40 my-5">
+        <div class="col text-center mt-3">
+            <h3 class="logo-font">Wine Tasting Experiences</h3>
+            <hr class="w-50 mb-1">
+        </div>
+    </div>
+    <div class="row">
+        <div class="experience-container col-10 offset-1">
+            <div class="row mt-1 mb-2"></div>
+            <div class="row">
+                {% for experience in experiences %}
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="card h-100 border-0">
+                            {% if experience.image %}
+                                <a href="">
+                                    <img class="card-img-top img-fluid rounded-5" src="{{ experience.image.url }}" alt="{{ experiences.name }}">
+                                </a>
+                            {% else %}
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png"
+                                        alt="{{ experiences.name }}">
+                                </a>
+                            {% endif %}
+                                <div class="card-body pb-0">
+                                   <p class="mb-0 font-weight-bold text-left">{{ experience.name }}</p>
+                                    <small><p class="mb-0 text-left">{{ experience.description }}</p></small>
+                                    <small><p class="mb-0 text-left font-weight-bold">£{{ experience.price }}</p></small>
+                                </div>
+                        </div>
+                    </div>
+                    <!-- Creates a full width horizontal rule after each row of experience card -->
+                    {% if forloop.counter|divisibleby:1 %}
+                            <div class="col-12 d-sm-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}                        
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container my-5">
     <div class="row my-5">
-        <div class="col">
-          {{ experiences }}
+        <div class="col mt-3">
+            <h6 class="mt-3 text-center font-weight-bold">You can buy your favourite English wines from our shop on the day of your visit.</h6>
         </div>
-
     </div>
 </div>
 <div class="container my-5">

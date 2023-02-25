@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    margin-top: 50px;
     height: calc(100vh - 164px);
     color: #555;
     font-family: 'Lato';
