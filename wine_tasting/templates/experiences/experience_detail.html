@@ -32,6 +32,13 @@
                 <p class="lead mb-0 text-left font-weight-bold">£{{ experience.price }}</p>
                 <p class="mt-3">{{ experience.description }}</p>
                 <p class="mt-3">{{ experience.content }}</p>
+                <button type="submit" class="btn btn-black rounded-5 text-uppercase mt-5">Book Now</Button>
+                <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 btn-lg mt-3">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="">Why not browse our cellar</span>
+                </a>
             </div>
         </div>
     </div>
