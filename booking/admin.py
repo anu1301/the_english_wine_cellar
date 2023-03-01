@@ -1,15 +1,23 @@
 from django.contrib import admin
-from .models import Booking
+from .models import Booking, BookingItem
+
+
+class BookingItemAdminInline(admin.TabularInline):
+    model = BookingItem
+    readonly_fields = ('bookingitem_total',)
 
 
 class BookingAdmin(admin.ModelAdmin):
-    # readonly_fields = ('booking_total',)
+    inlines = (BookingItemAdminInline,)
+
+    readonly_fields = ('booking_total', 'booking_ref',)
 
     list_display = (
         'booking_ref',
+        'full_name',
         'experience_choice',
-        'number_of_people',
         'booking_date',
+        'booking_total',
         'status',
     )
 
