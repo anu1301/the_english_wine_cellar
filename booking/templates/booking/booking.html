@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+  
+{% block content %}
+<div class="container mt-5 mb-2">
+    <div class="row">
+        <div class="col">
+            <hr class="mt-5">
+            <h2 class="logo-font mb-4">Booking</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% if booking_items %}
+            <div class="table-responsive rounded">
+                <table class="table table-sm table-borderless">
+                    <thead class="text-black">
+                        <tr>
+                            <th scope="col">Experience Information</th>
+                            <th scope="col"></th>
+                            <th scope="col">Price</th>
+                            <th scope="col">No: Of People</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+    
+{% endblock %}
