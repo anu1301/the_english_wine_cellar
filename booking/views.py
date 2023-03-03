@@ -13,6 +13,21 @@ def view_booking(request):
     return render(request, 'booking/booking.html')
 
 
+def booking_content(request):
+
+    booking_items = []
+    total = 0
+    experience_count = 0
+
+    context = {
+        'booking_items': booking_items,
+        'total': total,
+        'experience_count': experience_count,
+    }
+
+    return context
+
+
 # def bookingitem(request):
 #     """ A view that shows the booking page """
 

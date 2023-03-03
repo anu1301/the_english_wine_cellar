@@ -13,8 +13,8 @@
 <div class="container mt-5 mb-2">
     <div class="row">
         <div class="col">
-            <hr class="mt-5">
-            <h2 class="logo-font mb-4">Booking</h2>
+            <hr class="mt-3">
+            <h2 class="logo-font mb-4">Your Booking</h2>
             <hr>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <div class="col">
             {% if booking_items %}
             <div class="table-responsive rounded">
-                <table class="table table-sm table-borderless">
+                <!-- <table class="table table-sm table-borderless">
                     <thead class="text-black">
                         <tr>
                             <th scope="col">Experience Information</th>
@@ -32,6 +32,15 @@
                             <th scope="col">Date</th>
                             <th scope="col">Total</th>
                         </tr>
-                    </thead>
-    
+                    </thead> -->
+            </div>
+            {% else %}
+            <p class="lead mb-5">There is nothing booked</p>
+            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 btn-lg">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span>Why not browse our cellar</span>
+            </a>
+            {% endif %}
 {% endblock %}
