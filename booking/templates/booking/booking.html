@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
     </div>
+</div>
 {% endblock %}
-  
+
 {% block content %}
 <div class="container mt-5 mb-2">
     <div class="row">
@@ -22,18 +22,62 @@
         <div class="col">
             {% if booking_items %}
             <div class="table-responsive rounded">
-                {{ booking_items }}
-                <!-- <table class="table table-sm table-borderless">
-                    <thead class="text-black">
+                <table class="table table-sm table-borderless">
+                    <thead class="text-black small">
                         <tr>
                             <th scope="col">Experience Information</th>
                             <th scope="col"></th>
                             <th scope="col">Price</th>
-                            <th scope="col">No: Of People</th>
+                            <th scope="col">No: of People</th>
                             <th scope="col">Date</th>
                             <th scope="col">Total</th>
                         </tr>
-                    </thead> -->
+                    </thead>
+                    {% for item in booking_items %}
+                    <tr>
+                        <td class="py-3 w-25">
+                            {% if item.experience.image %}
+                            <img class="img-fluid rounded" src="{{ item.experience.image.url }}"
+                                alt="{{ item.product.name }}">
+                            {% else %}
+                            <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png"
+                                alt="{{ item.product.name }}">
+                            {% endif %}
+                        </td>
+                        <td class="py-3 w-20">
+                            <p class="my-0 small"><strong>{{ item.experience.name }}</strong></p>
+                        </td>
+                        <td class="py-3 w-25">
+                            <p class="my-0">£{{ item.experience.price }}</p>
+                        </td>
+                        <td class="py-3 w-25">
+                            <p class="my-0">{{ item.quantity }}</p>
+                        </td>
+                        <td class="py-3 w-25">
+                            <p class="my-0">${{ item.booking.booking_date }}</p>
+                        </td>
+                        <td class="py-3 w-25">
+                            <p class="my-0">£{{ item.experience.price }}</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 mt-5 btn-lg">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span>Why not browse our cellar</span>
+                            </a>
+                            <a href="" class="btn btn-black rounded-5 mt-5 btn-lg">
+                                <span class="text-uppercase">Secure Checkout</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             </div>
             {% else %}
             <p class="lead mb-5">There is nothing booked</p>
@@ -51,4 +95,4 @@
                 <span>Why not browse our cellar</span>
             </a>
             {% endif %}
-{% endblock %}
+            {% endblock %}
