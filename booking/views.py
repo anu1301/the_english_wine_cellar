@@ -37,9 +37,8 @@ def book_now(request, item_id):
     # else:
     #     booking[item_id] = date
     #     messages.success(request, f'Added {experience.name} to your booking')
-   
+
     request.session['booking'] = booking
-    print(request.session['booking'])
     return redirect(redirect_url)
 
 
