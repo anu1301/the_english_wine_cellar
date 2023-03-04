@@ -42,6 +42,21 @@
         {% endif %}
     </div>
 </li>
+<!-- Button to access booking -->
+<li class="list-inline-item">
+    <a class="{% if grand_total %}text-black font-weight-bold{% else %}text-grey{% endif %} nav-link d-block d-lg-none" href="{% url 'view_booking' %}">
+        <div class="text-center">
+            <div><i class="fa-solid fa-wine-glass-empty"></i></div>
+            <p class="my-0">
+                {% if grand_total %}
+                    £{{ grand_total|floatformat:2 }}
+                {% else %}
+                    £0.00
+                {% endif %}
+            </p>
+        </div>
+    </a>
+</li>
 <!-- Button to access the shopping basket -->
 <li class="list-inline-item">
     <a class="{% if grand_total %}text-black font-weight-bold{% else %}text-grey{% endif %} nav-link d-block d-lg-none" href="{% url 'view_bag' %}">

@@ -1,9 +1,10 @@
-from django.shortcuts import render
-# , redirect, reverse, get_object_or_404
-# from django.contrib import messages
+from django.shortcuts import render, redirect, reverse
+# get_object_or_404
+from django.contrib import messages
+from datetime import datetime
 
 # from .forms import BookingForm, BookingItemForm
-# from .models import BookingItem
+from .models import BookingItem, Booking
 # from wine_tasting.models import Experiences
 
 
@@ -13,19 +14,34 @@ def view_booking(request):
     return render(request, 'booking/booking.html')
 
 
-def booking_content(request):
+def book_now(request, item_id):
+    """ Add a number of people and date of the experience to booking """
 
-    booking_items = []
-    total = 0
-    experience_count = 0
+    quantity = int(request.POST.get('quantity'))
+    # date = datetime(request.POST.get('date'))
+    redirect_url = request.POST.get('redirect_url')
+    booking = request.session.get('booking', {})
 
-    context = {
-        'booking_items': booking_items,
-        'total': total,
-        'experience_count': experience_count,
-    }
+    if item_id in list(booking.keys()):
+        booking[item_id] += quantity
+        # messages.success(
+            # request, f'Updated {experiences.name} quantity to {booking[item_id]}')
+    else:
+        booking[item_id] = quantity
+        # messages.success(request, f'Added {experiences.name} to your booking')
 
-    return context
+    # if item_id in list(booking.keys()):
+    #     booking[item_id] += date
+    #     messages.success(
+    #         request, f'Updated {experience.name} date to {booking[item_id]}')
+    # else:
+    #     booking[item_id] = date
+    #     messages.success(request, f'Added {experience.name} to your booking')
+   
+    request.session['booking'] = booking
+    print(request.session['booking'])
+    return redirect(redirect_url)
+
 
 
 # def bookingitem(request):
@@ -57,5 +73,4 @@ def booking_content(request):
 #         'experience': experience,
 #         'form_items': form_items,
 #     }
-#     print(form_items)
 #     return render(request, template, context)
