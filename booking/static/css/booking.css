@@ -30,8 +30,8 @@
     right: .5rem;
 } 
 
-#payment-form .form-control,
-#card-element {
+#payment_form .form-control,
+#card_element {
     color: #000;
     border: 1px solid #000;
 }

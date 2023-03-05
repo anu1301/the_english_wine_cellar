@@ -90,6 +90,8 @@ def booking_out(request):
     template = 'booking/booking_out.html'
     context = {
         'booking_form': booking_form,
+        # 'stripe_public_key': stripe_public_key,
+        # 'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
