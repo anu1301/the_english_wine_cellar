@@ -57,14 +57,6 @@ class Booking(models.Model):
             raise ValidationError(f'The date cannot be in the past!')
 
 
-        # if self.date < datetime.date.today():
-        #     raise ValidationError("The date cannot be in the past!")
-        # super().save(*args, **kwargs)
-
-        # def __str__(self):
-        #     return self.booking_date
-
-
 class BookingItem(models.Model):
     bookings = models.ForeignKey(
         Booking, null=False, blank=False, on_delete=models.CASCADE, related_name='bookingitem')

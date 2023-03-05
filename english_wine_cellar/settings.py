@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'profiles',
     'wine_tasting',
     'booking',
+    'booking_checkout',
 
     # Other
     'crispy_forms',
