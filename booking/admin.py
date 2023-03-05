@@ -10,12 +10,11 @@ class BookingItemAdminInline(admin.TabularInline):
 class BookingAdmin(admin.ModelAdmin):
     inlines = (BookingItemAdminInline,)
 
-    readonly_fields = ('booking_total', 'booking_ref',)
+    readonly_fields = ('booking_total', 'booking_ref', 'stripe_pid',)
 
     list_display = (
         'booking_ref',
         'full_name',
-        'experience_choice',
         'booking_date',
         'booking_total',
         'status',

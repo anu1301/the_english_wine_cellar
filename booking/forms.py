@@ -1,11 +1,11 @@
 from django import forms
-from .models import Booking, BookingItem
+from .models import Booking
 
 
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ('full_name', 'email', 'phone_number', 'experience_choice', 'booking_date',)
+        fields = ('full_name', 'email', 'phone_number',)
 
     def __init__(self, *args, **kwargs):
         """
@@ -17,8 +17,6 @@ class BookingForm(forms.ModelForm):
             'full_name': 'Full Name',
             'email': 'Email Address',
             'phone_number': 'Phone Number',
-            'experience_choice': 'Experience Choice',
-            'booking_date': 'Booking Date',
         }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
@@ -31,17 +29,3 @@ class BookingForm(forms.ModelForm):
             # self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
 
-
-class BookingItemForm(forms.ModelForm):
-    class Meta:
-        model = BookingItem
-        fields = ('number_of_people',)
-
-    def __init__(self, *args, **kwargs):
-        """
-        Add placeholder
-        """
-        super().__init__(*args, **kwargs)
-        placeholders = {
-            'number_of_people': 'Number of People'
-        }

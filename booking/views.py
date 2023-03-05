@@ -6,6 +6,7 @@ from datetime import datetime
 
 from .models import BookingItem, Booking
 from wine_tasting.models import Experiences
+from .forms import BookingForm
 
 
 def view_booking(request):
@@ -77,3 +78,18 @@ def remove_from_booking(request, item_id):
     except Exception as e:
         messages.error(request, f'Error removing item: {e}')
         return HttpResponse(status=500)
+
+
+def booking_out(request):
+    booking = request.session.get('booking', {})
+    if not booking:
+        messages.error(request, 'There is no booking')
+        return redirect(reverse('experiences'))
+
+    booking_form = BookingForm()
+    template = 'booking/booking_out.html'
+    context = {
+        'booking_form': booking_form,
+    }
+
+    return render(request, template, context)
