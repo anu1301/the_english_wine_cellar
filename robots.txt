@@ -2,3 +2,4 @@ User-agent: *
 Disallow: /accounts/
 Disallow: /bag/
 Disallow: /booking/
+Sitemap: https://the-english-wine-cellar.herokuapp.com/sitemap.xml
