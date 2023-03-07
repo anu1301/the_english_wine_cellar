@@ -112,6 +112,8 @@ input[name='q']::placeholder {
 .link_image {
     height: 200px;
     width: 200px;
+    margin-right: auto;
+    margin-left: auto;
 }
 /* ------------------------------- bootstrap toasts */
 

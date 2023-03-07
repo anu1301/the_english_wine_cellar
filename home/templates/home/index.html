@@ -28,43 +28,30 @@
         </div>
         <div class="container-fluid">
             <div class="row my-3">
-              <div class="col col-sm-6">
-                  <a href="{% url 'products' %}?category=red_wine,white_wine,rose_wine,sparkling_wine" class="">
+              <div class="col-sm-12 col-md-6 col-lg-3">
+                  <a href="{% url 'products' %}?category=red_wine,white_wine,rose_wine,sparkling_wine" class="text-center">
                       <img class="link_image img-thumbnail card-body"src="{{ MEDIA_URL }}wine_cellar_wine_bottles.jpg" alt="rack of wine bottles">
-                      <h6 class="text-muted text-center small px-3 mt-2"><strong>Wines</strong></h6>
+                      <h6 class="text-muted text-center small px-3 mt-3 mb-5"><strong>Wines</strong></h6>
                     </a>
-                  <a href="{% url 'products' %}?category=red_wine,white_wine,rose_wine,sparkling_wine" class="">
-                      <img class="link_image img-thumbnail card-body"src="{{ MEDIA_URL }}wine_cellar_wine_bottles.jpg" alt="rack of wine bottles">
-                      <h6 class="text-muted text-center small px-3 mt-2"><strong>Wines</strong></h6>
-                    </a>
-                  <a href="{% url 'products' %}?category=red_wine,white_wine,rose_wine,sparkling_wine" class="">
-                      <img class="link_image img-thumbnail card-body"src="{{ MEDIA_URL }}wine_cellar_wine_bottles.jpg" alt="rack of wine bottles">
-                      <h6 class="text-muted text-center small px-3 mt-2"><strong>Wines</strong></h6>
-                    </a>
-                  <a href="{% url 'products' %}?category=red_wine,white_wine,rose_wine,sparkling_wine" class="">
-                      <img class="link_image img-thumbnail card-body"src="{{ MEDIA_URL }}wine_cellar_wine_bottles.jpg" alt="rack of wine bottles">
-                      <h6 class="text-muted text-center small px-3 mt-2"><strong>Wines</strong></h6>
-                    </a>
-                    
-              <!-- </div>
-              <div class="col"> -->
-                2 of 4
-              <!-- </div>
-              <div class="col"> -->
-                3 of 4
-              <!-- </div>
-              <div class="col"> -->
-                4 of 4
-              <!-- </div> -->
-            </div>
-        </div>
-        <div class="container h-50">
-            <div class="row h-30 my-auto mx-auto mw-100 ">
-              <div class="col mw-100 text-center">
-                testimonial 1
               </div>
-              <div class="col mw-100 text-center">
-               testimonial 2
+              <div class="col-sm-12 col-md-6 col-lg-3">
+                <a href="{% url 'products' %}?category=wine_glasses,decanters" class="">
+                  <img class="link_image img-thumbnail card-body"src="{{ MEDIA_URL }}red_wine_glasses.jpg" alt="set of red wine glasses">
+                  <h6 class="text-muted text-center small px-3 mt-3 mb-5"><strong>Glassware</strong></h6>
+                </a>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-3">
+                <a href="{% url 'products' %}?category=award_winners,mixed_cases,offers" class="">
+                  <img class="link_image img-thumbnail card-body"src="{{ MEDIA_URL }}baccus_mixed_case_wine_2.jpg" alt="mixed case of English bacchus wine">
+                  <h6 class="text-muted text-center small px-3 mt-3 mb-5"><strong>Mixed Cases & Award Winners</strong></h6>
+                </a>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-3">
+                <a href="{% url 'experiences' %}" class="">
+                  <img class="link_image img-thumbnail card-body"src="{{ MEDIA_URL }}wines_tasting_cheese_pairing_2.jpg" alt="platter of cheeses, white wine bottle and wine glasses">
+                  <h6 class="text-muted text-center small px-3 mt-3 mb-5"><strong>Wine Tasting Experiences</strong></h6>
+                </a>
+              </div>
             </div>
         </div>
     </div>
