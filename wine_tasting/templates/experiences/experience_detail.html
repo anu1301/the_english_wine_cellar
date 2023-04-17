@@ -11,7 +11,7 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row h-40 my-5">
+    <div class="row h-40 my-3">
         <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
             <div class="image-containere my-5">
                 {% if experience.image %}
@@ -37,7 +37,7 @@
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="col-12">
-                            <p class="mt-3"><strong>Select Number of People:</strong></p>
+                            <p class="mt-2"><strong>Select Number of People:</strong></p>
                             <div class="form-group w-50">
                                 <!-- Input group containing quantity input -->
                                 <div class="input-group input-group-{{ bookingitem.id }}">
@@ -47,10 +47,8 @@
                                 </div>
                             </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <p class="mt-3"><strong>Select Date:</strong></p>
-                            <div class="form-group w-50">
+                            <p class="mt-1"><strong>Select Date:</strong></p>
+                            <div class="form-group w-100">
                                 <!-- Input group containing date input -->
                                 <div class="input-group {{ booking.booking_date }} border-black">
                                     <input class="form-control date_input" type="date" name="booking_date"
@@ -61,7 +59,7 @@
                                     <input type="submit" class="btn btn-black rounded-5 text-uppercase mt-3"
                                         value="Add to Booking">
                                 </div>
-                                <div class="col-12">
+                                <div>
                                     <!-- "Back" button links back to the experiences page -->
                                     <a href="{% url 'experiences' %}" class="btn btn-outline-black rounded-5 mt-3">
                                         <span class="icon">
