@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from decimal import Decimal
 from django.core.exceptions import ValidationError
-from django.utils.timezone import now
 
 from wine_tasting.models import Experiences
 from profiles.models import UserProfile
@@ -16,6 +15,16 @@ STATUS = ((1, 'Confirmed'), (0, 'Not Confirmed'))
 EXPERIENCELIST = {}
 
 
+def validate_date(value):
+    today = datetime.date.today()
+    if value <= today:
+        raise ValidationError("Date cannot be today or in the past!")
+# def validate_date(request):
+#     date = booking_date
+#     if date < datetime.today():
+#         raise ValidationError(f'The date cannot be in the past!')
+
+
 class Booking(models.Model):
     user_profile = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL, null=True, blank=True,
@@ -25,7 +34,11 @@ class Booking(models.Model):
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
-    booking_date = models.DateField(auto_now=False)
+    # booking_date = models.DateField(auto_now=False)
+    booking_date = models.DateField(
+        validators=[validate_date], blank=True, null=True)
+    booking_date = models.DateField(
+        validators=[validate_date], blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     booking_total = models.DecimalField(
@@ -55,13 +68,16 @@ class Booking(models.Model):
         def __str__(self):
             return self.booking_ref
 
-    def validate_date(request):
-        date = self.booking_date
-        if date < datetime.today():
-            raise ValidationError(f'The date cannot be in the past!')
 
-        def __str__(self):
-            return self.booking_date
+    # def validate_date(value):
+    #     date = self.booking_date
+    #     if date < datetime.today():
+    #         raise ValidationError(f'The date cannot be in the past!')
+
+    # def validate_date(value):
+    #     today = datetime.date.today()
+    #     if value <= today:
+    #         raise ValidationError("Date cannot be today or in the past!")
 
 
 class BookingItem(models.Model):

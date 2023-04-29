@@ -45,7 +45,7 @@
                                 alt="{{ item.product.name }}">
                             {% endif %}
                         </td>
-                        <td class="py-3 w-20">
+                        <td class="py-3 w-25">
                             <p class="my-0 small"><strong>{{ item.experience.name }}</strong></p>
                         </td>
                         <td class="py-3 w-25">
@@ -67,8 +67,18 @@
                             <a class="remove-item text-danger float-right"
                                 id="remove_{{ item.item_id }}"><small><strong>Remove</strong></small></a>
                         </td>
-                        <td class="py-3 w-25">
-                            <p class="my-0">${{ item.booking.booking_date }}</p>
+                        <td class="py-3 w-20">
+                            <form class="form update-form" action="{% url 'adjust_booking' item.item_id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <!-- Input group containing date input -->
+                                    <div class="input-group input-group-{{ item.item_id }}">
+                                        <input class="form-control date_input border-black" type="date" name="date"
+                                            value="{{ item.date }}" 
+                                            data-item_id="{{ item.item_id }}" id="id_date_{{ item.item_id }}">
+                                    </div>
+                                </div>
+                            </form>
                         </td>
                         <td class="py-3 w-25">
                             <p class="my-0">£{{ item.experience.price|calc_subtotal:item.quantity }}</p>
@@ -88,7 +98,7 @@
                                 </span>
                                 <span>Why not browse our cellar</span>
                             </a>
-                            <a href="{% url 'booking_out' %}" class="btn btn-black rounded-5 mt-3 btn-lg">
+                            <a href="" class="btn btn-black rounded-5 mt-3 btn-lg">
                                 <span class="text-uppercase">Secure Checkout</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>
