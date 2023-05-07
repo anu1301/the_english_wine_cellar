@@ -10,11 +10,10 @@ def booking_contents(request):
     booking_items = []
     booking_total = 0
     experience_count = 0
-    # date = '2023-04-22'
-    # date = datetime.strptime(date, '%Y-%m-%d')
+    date = '22-April-2023'
+    converted = datetime.strptime(date, '%d-%B-%Y')
 
     booking = request.session.get('booking', {})
-    print(booking)
 
     for item_id, item_data in booking.items():
         if isinstance(item_data, int):
@@ -29,7 +28,7 @@ def booking_contents(request):
         else:
             experience = get_object_or_404(Experiences, pk=item_id)
             for date, quantity in item_data['items_by_date'].items():
-                booking_total += quantity * experience.price
+                booking_total += Decimal(quantity * experience.price)
                 experience_count += quantity
                 booking_items.append({
                     'item_id': item_id,

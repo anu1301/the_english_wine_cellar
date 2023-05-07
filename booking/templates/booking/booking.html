@@ -26,11 +26,11 @@
                 <table class="table table-sm table-borderless">
                     <thead class="text-black small">
                         <tr>
-                            <th scope="col">Experience Information</th>
+                            <th scope="col">Experience Info:</th>
                             <th scope="col"></th>
                             <th scope="col">Price</th>
                             <th scope="col">No: of People</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Booking Date</th>
                             <th scope="col">Total</th>
                         </tr>
                     </thead>
@@ -39,21 +39,21 @@
                         <td class="py-3 w-25">
                             {% if item.experience.image %}
                             <img class="img-fluid rounded" src="{{ item.experience.image.url }}"
-                                alt="{{ item.product.name }}">
+                                alt="{{ item.experience.name }}">
                             {% else %}
                             <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png"
-                                alt="{{ item.product.name }}">
+                                alt="{{ item.experience.name }}">
                             {% endif %}
                         </td>
                         <td class="py-3 w-25">
                             <p class="my-0 small"><strong>{{ item.experience.name }}</strong></p>
                         </td>
-                        <td class="py-3 w-25">
+                        <td class="py-3 w-20">
                             <p class="my-0">£{{ item.experience.price }}</p>
                         </td>
-                        <td class="py-3 w-25">
-                            <form class="form update-form" action="{% url 'adjust_booking' item.item_id %}" method="POST">
-                                {% csrf_token %}
+                        <form class="form update-form" action="{% url 'adjust_booking' item.item_id %}" method="POST">
+                            {% csrf_token %}
+                            <td class="py-3 w-25">
                                 <div class="form-group">
                                     <!-- Input group containing quantity input -->
                                     <div class="input-group input-group-{{ item.item_id }}">
@@ -62,36 +62,35 @@
                                             data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                     </div>
                                 </div>
-                            </form>
-                            <a class="update-link text-info"><small><strong>Update</strong></small></a>
-                            <a class="remove-item text-danger float-right"
-                                id="remove_{{ item.item_id }}"><small><strong>Remove</strong></small></a>
-                        </td>
-                        <td class="py-3 w-20">
-                            <form class="form update-form" action="{% url 'adjust_booking' item.item_id %}" method="POST">
-                                {% csrf_token %}
+                            </td>
+                            <td class="py-3 w-25">
                                 <div class="form-group">
-                                    <!-- Input group containing date input -->
+                                    <!-- Input group containing date input  -->
                                     <div class="input-group input-group-{{ item.item_id }}">
                                         <input class="form-control date_input border-black" type="date" name="date"
-                                            value="{{ item.date }}" 
-                                            data-item_id="{{ item.item_id }}" id="id_date_{{ item.item_id }}">
+                                            value="{{ item.date }}" data-item_id="{{ item.item_id }}"
+                                            id="id_date_{{ item.item_id }}">
                                     </div>
                                 </div>
-                            </form>
-                        </td>
+                            </td>
+                        </form>
                         <td class="py-3 w-25">
                             <p class="my-0">£{{ item.experience.price|calc_subtotal:item.quantity }}</p>
                         </td>
                     </tr>
+                    <td class="py-3 w-25">
+                        <a class="remove-item text-danger float-right"
+                                    id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
+                        <a class="update-link text-info"><strong>Update</strong></a>
+                    </td>
                     {% endfor %}
                     <tr>
-                        <td colspan="5" class="pt-5 text-right">
+                        <td colspan="6" class="pt-5 text-right">
                             <h5><strong>Booking Total: £{{ booking_total|floatformat:2 }}</strong></h5>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="text-right">
+                        <td colspan="6" class="text-right">
                             <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 mt-3 btn-lg">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
@@ -124,30 +123,31 @@
                 <span>Why not browse our cellar</span>
             </a>
             {% endif %}
-{% endblock %}
-{% block postloadjs %}
-{{ block.super }}
-{% include 'includes/quantity_input_script.html' %}
-<script type="text/javascript">
-    // Update quantity on click
-    $('.update-link').click(function (e) {
-        var form = $(this).prev('.update-form');
-        form.submit();
-    })
+            {% endblock %}
+            {% block postloadjs %}
+            {{ block.super }}
+            {% include 'includes/quantity_input_script.html' %}
+            <script type="text/javascript">
+                // Update quantity/date on click
+                $('.update-link').click(function (e) {
+                    var form = $('.update-form');
+                    console.log(form)
+                    form.submit();
+                })
 
-    // Remove item and reload on click
-    $('.remove-item').click(function (e) {
-        var csrfToken = "{{ csrf_token }}";
-        var itemId = $(this).attr('id').split('remove_')[1];
-        var url = `/booking/remove/${itemId}/`;
-        var data = {
-            'csrfmiddlewaretoken': csrfToken
-        };
+                // Remove item and reload on click()
+                $('.remove-item').click(function (e) {
+                    var csrfToken = "{{ csrf_token }}";
+                    var itemId = $(this).attr('id').split('remove_')[1];
+                    var url = `/booking/remove/${itemId}/`;
+                    var data = {
+                        'csrfmiddlewaretoken': csrfToken
+                    };
 
-        $.post(url, data)
-            .done(function () {
-                location.reload();
-            });
-    })
-</script>
-{% endblock %}
+                    $.post(url, data)
+                        .done(function () {
+                            location.reload();
+                        });
+                })
+            </script>
+            {% endblock %}

@@ -21,10 +21,16 @@ def add_to_booking(request, item_id):
     experience = get_object_or_404(Experiences, pk=item_id)
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
-    date = request.POST.get('date')
+    date = str(request.POST.get('date'))
     booking = request.session.get('booking', {})
-    print(item_id)
-    print(request.POST['date'])
+
+    # if item_id in list(booking.keys()):
+    #     if date == booking[item_id]['date']:
+    #         booking[item_id]['quantity'] = quantity
+    #     messages.success(request, f'Updated {experience.name} quantity to {booking[item_id]}')
+    # else:
+    #     booking[item_id] = {'date': date, 'quantity': quantity}
+    #     messages.success(request, f'Added {experience.name} to your booking')  
 
     if item_id in list(booking.keys()):
         if date in booking[item_id]['items_by_date'].keys():
@@ -47,53 +53,55 @@ def adjust_booking(request, item_id):
     """
     experience = get_object_or_404(Experiences, pk=item_id)
     quantity = int(request.POST.get('quantity'))
-    redirect_url = request.POST.get('redirect_url')
-    date = request.POST.get('date')
+    date = str(request.POST.get('date'))
     booking = request.session.get('booking', {})
-    # #     experience = get_object_or_404(Experiences, pk=item_id)
-# #     quantity = int(request.POST.get('quantity'))
-# #     # date = request.POST.get('booking_date')
-# #     booking = request.session.get('booking', {})
+
+    if quantity > 0:
+        # booking[item_id]['items_by_date'][date] = quantity
+        booking[item_id] = {'items_by_date': {date: quantity}}
+        messages.success(request, f'Updated {experience.name} in your booking')
+    else:
+        del booking[item_id]['items_by_date'][date]
+        if not booking[item_id]['items_by_date']:
+            booking.pop(item_id)
+            messages.success(request, f'Removed {experience.name} from your booking')
 
     # if quantity > 0:
-    #     booking[item_id]['items_by_date'][date] = quantity
-    #     messages.success(request, f'Updated {experience.name} quantity to {booking[item_id]["items_by_date"][date]}')
+    #     booking[item_id] = quantity
+    #     messages.success(request, f'Updated {experience.name} quantity to {booking[item_id]}')
     # else:
-    #     del booking[item_id]['items_by_date'][date]
-    #     if not booking[item_id]['items_by_date']:
-    #         booking.pop(item_id)
-    #     messages.success(
-    #         request, f'Removed {experience.name} from your booking')
+    #     bag.pop(item_id)
+    #     messages.success(request, f'Removed {experience.name} from your booking')
 
-    # request.session['booking'] = booking
-    # return redirect(reverse('view_booking'))
+    request.session['booking'] = booking
+    return redirect(reverse('view_booking'))
 
 
-# # def remove_from_booking(request, item_id):
-# #     """ Removes specified experience from the booking """
+def remove_from_booking(request, item_id):
+    """ Removes specified experience from the booking """
 
-# #     try:
-# #         experience = get_object_or_404(Experiences, pk=item_id)
-# #         item = None
-# #         if 'item_id' in request.POST:
-# #             item = request.POST['item_id']
-# #         booking = request.session.get('booking', {})
+    try:
+        experience = get_object_or_404(Experiences, pk=item_id)
+        item = None
+        if 'item_id' in request.POST:
+            item = request.POST['item_id']
+        booking = request.session.get('booking', {})
 
-# #         if item:
-# #             del booking[item_id]["item_id"]
-# #             messages.success(
-# #                 request, f'Removed {experience.name} from your booking')
-# #         else:
-# #             booking.pop(item_id)
-# #             messages.success(
-# #                 request, f'Removed {experience.name} from your booking')
+        if item:
+            del booking[item_id]["item_id"]
+            messages.success(
+                request, f'Removed {experience.name} from your booking')
+        else:
+            booking.pop(item_id)
+            messages.success(
+                request, f'Removed {experience.name} from your booking')
 
-# #         request.session['booking'] = booking
-# #         return HttpResponse(status=200)
+        request.session['booking'] = booking
+        return HttpResponse(status=200)
 
-# #     except Exception as e:
-# #         messages.error(request, f'Error removing item: {e}')
-# #         return HttpResponse(status=500)
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)
 
 
 # # def booking_out(request):
