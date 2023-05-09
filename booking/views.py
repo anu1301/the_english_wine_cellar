@@ -24,21 +24,15 @@ def add_to_booking(request, item_id):
     date = str(request.POST.get('date'))
     booking = request.session.get('booking', {})
 
-    # if item_id in list(booking.keys()):
-    #     if date == booking[item_id]['date']:
-    #         booking[item_id]['quantity'] = quantity
-    #     messages.success(request, f'Updated {experience.name} quantity to {booking[item_id]}')
-    # else:
-    #     booking[item_id] = {'date': date, 'quantity': quantity}
-    #     messages.success(request, f'Added {experience.name} to your booking')  
-
     if item_id in list(booking.keys()):
         if date in booking[item_id]['items_by_date'].keys():
             booking[item_id]['items_by_date'][date] += quantity
-            messages.success(request, f'Updated {experience.name} quantity to {booking[item_id]}')
+            messages.success(
+                request, f'Updated {experience.name} quantity to {booking[item_id]}')
         else:
             booking[item_id]['items_by_date'][date] = quantity
-            messages.success(request, f'Added {experience.name} to your booking')
+            messages.success(
+                request, f'Added {experience.name} to your booking')
     else:
         booking[item_id] = {'items_by_date': {date: quantity}}
         messages.success(request, f'Added {experience.name} to your booking')
@@ -57,21 +51,14 @@ def adjust_booking(request, item_id):
     booking = request.session.get('booking', {})
 
     if quantity > 0:
-        # booking[item_id]['items_by_date'][date] = quantity
         booking[item_id] = {'items_by_date': {date: quantity}}
-        messages.success(request, f'Updated {experience.name} in your booking')
+        messages.success(request, f'Updated {experience.name} in your{booking[item_id]}')
     else:
         del booking[item_id]['items_by_date'][date]
         if not booking[item_id]['items_by_date']:
             booking.pop(item_id)
-            messages.success(request, f'Removed {experience.name} from your booking')
-
-    # if quantity > 0:
-    #     booking[item_id] = quantity
-    #     messages.success(request, f'Updated {experience.name} quantity to {booking[item_id]}')
-    # else:
-    #     bag.pop(item_id)
-    #     messages.success(request, f'Removed {experience.name} from your booking')
+            messages.success(
+                request, f'Removed {experience.name} from your booking')
 
     request.session['booking'] = booking
     return redirect(reverse('view_booking'))
@@ -79,16 +66,37 @@ def adjust_booking(request, item_id):
 
 def remove_from_booking(request, item_id):
     """ Removes specified experience from the booking """
+    try:
+        experience = get_object_or_404(Experiences, pk=item_id)
+        date = str(request.POST.get('date'))
+        booking = request.session.get('booking', {})
+
+        if 'item_id' in request.POST:
+            del booking[item_id]['items_by_date'][date]
+            if not booking[item_id]['items_by_date']:
+                booking.pop(item_id)
+                messages.success(
+                    request, f'Removed {experience.name} from your booking')
+        else:
+            booking.pop(item_id)
+            messages.success(
+                request, f'Removed {experience.name} from your booking')
+
+        request.session['booking'] = booking
+        return HttpResponse(status=200)
+
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)
 
     try:
         experience = get_object_or_404(Experiences, pk=item_id)
-        item = None
-        if 'item_id' in request.POST:
-            item = request.POST['item_id']
+        date = str(request.POST.get('date'))
         booking = request.session.get('booking', {})
 
-        if item:
-            del booking[item_id]["item_id"]
+        del booking[item_id]["items_by_date"][date]
+        if not booking[item_id]['items_by_date']:
+            bag.pop(item_id)
             messages.success(
                 request, f'Removed {experience.name} from your booking')
         else:

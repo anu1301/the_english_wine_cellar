@@ -73,16 +73,21 @@
                                     </div>
                                 </div>
                             </td>
+                            <td class="py-3 w-25">
+                                <a class="remove-item text-danger float-right"
+                                            id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
+                                <a class="update-link text-info"><strong>Update</strong></a>
+                            </td>
                         </form>
                         <td class="py-3 w-25">
                             <p class="my-0">£{{ item.experience.price|calc_subtotal:item.quantity }}</p>
                         </td>
                     </tr>
-                    <td class="py-3 w-25">
+                    <!-- <td class="py-3 w-25">
                         <a class="remove-item text-danger float-right"
                                     id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
                         <a class="update-link text-info"><strong>Update</strong></a>
-                    </td>
+                    </td> -->
                     {% endfor %}
                     <tr>
                         <td colspan="6" class="pt-5 text-right">
@@ -131,7 +136,6 @@
                 // Update quantity/date on click
                 $('.update-link').click(function (e) {
                     var form = $('.update-form');
-                    console.log(form)
                     form.submit();
                 })
 
