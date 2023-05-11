@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'wine_tasting',
     'booking',
     'wishlist',
+    'reviews',
 
     # Other
     'crispy_forms',

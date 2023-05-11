@@ -80,18 +80,17 @@
                         </div>
 
                         <div class="col-12">
+                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 mt-5">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="text-uppercase">Keep Shopping</span>
+                            </a>
                             <!-- Add to wishlist -->
-                            <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-black rounded-5 text-uppercase mt-5" role="button">Add to Wish List</a>
+                            <!-- <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-black rounded-5 text-uppercase mt-5" role="button">Add to Wish List</a> -->
                           <!-- Add to bag button -->
                             <input type="submit" class="btn btn-black rounded-5 text-uppercase mt-5" value="Add to Bag">
                         </div>
-                          <!-- Keep shopping button links back to the products page -->
-                          <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 mt-5">
-                            <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="text-uppercase">Keep Shopping</span>
-                        </a>
                         <!-- Redirects user back to the same page once product added to the shopping basket -->
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </div>
