@@ -8,7 +8,9 @@ from .forms import ReviewForm
 def submit_review(request, product_id):
     if request.method == 'POST':
         try:
-            reviews = ReviewRating.objects.get(user__id=request.user.id, product__id=product_id)
+            reviews = ReviewRating.objects.get(
+                user__id=request.user.id, product__id=product_id
+                )
             form = ReviewForm(request.POST, instance=reviews)
             form.save()
             messages.success(request, 'Your review is being updated.')
@@ -24,5 +26,8 @@ def submit_review(request, product_id):
                 data.product_id = product_id
                 data.user_id = request.user.id
                 data.save()
-                messages.success(request, 'Thank you for your feedback, it has successfully been submitted.')
+                messages.success(
+                    request,
+                    'Your feedback, it has successfully been submitted.'
+                    )
                 return HttpResponseRedirect(request.META["HTTP_REFERER"])

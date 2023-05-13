@@ -54,9 +54,16 @@
                             <p class="mt-2">Select booking date</p>
                             <!-- Input group containing date input -->
                             <div class="input-group {{ bookingitem.id }} border-black">
-                                <input class="form-control date_input" type="date" name="date"
-                                    value="{{ booking.booking_date }}" data-date-format="dd/mmm/yyyy"
-                                    data-item_id="{{ bookingitem.id }}" id="id_date_{{ bookingitem.id }}" required>
+                                <input 
+                                class="form-control date_input" 
+                                type="date" 
+                                name="date"
+                                value="{{ booking.booking_date }}" 
+                                data-date-format="dd/mmm/yyyy"
+                                data-item_id="{{ bookingitem.id }}" 
+                                id="id_date_{{ bookingitem.id }}" 
+                                required
+                                >
                             </div>
                             <div class="col-12">
                                 <input type="submit" class="btn btn-black rounded-5 text-uppercase mt-3"
@@ -88,14 +95,14 @@
 {% block postloadjs %}
 {{ block.super }}
 <script type="text/javascript">
-    console.log(load)
-    $('.date_input').submit(function() {
-        var today = new Date();
-        if ('.date_input'.val() <= today)
-        alert('Date must not be in the past!')
-        else
-        console.log(form)
-        // form.submit()
+    window.addEventListener('load', () => {
+        const inputs = document.getElementsByTagName('input');
+        for (let i = 0; i < inputs.length; i++) {
+            let input = inputs[i];
+            if (input.name === 'date') {
+                input.min = new Date().toISOString().split("T")[0];
+            }
+        }
     });
 </script>
 {% endblock %}
