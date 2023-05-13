@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="row my-5">
         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 ">
-            <div class="class img-container my-5">
+            <div class="class img-container my-4">
                 {% if product.image %}
                 <a href="{{ product.image.url }}" target="_blank">
                     <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 my-5">
+        <div class="col-12 col-md-6 col-lg-4 my-4">
             <div class="product-details-container mb-5 mt-md-5">
                 <p class="mb-0">{{ product.name }}</p>
                 <p class="lead mb-0 text-left font-weight-bold">£{{ product.price }}</p>
@@ -88,7 +88,7 @@
                             </a>
                             <!-- Add to wishlist -->
                             <!-- <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-black rounded-5 text-uppercase mt-5" role="button">Add to Wish List</a> -->
-                          <!-- Add to bag button -->
+                            <!-- Add to bag button -->
                             <input type="submit" class="btn btn-black rounded-5 text-uppercase mt-5" value="Add to Bag">
                         </div>
                         <!-- Redirects user back to the same page once product added to the shopping basket -->
@@ -100,27 +100,36 @@
     </div>
     <div class="form-row">
         <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
-            <hr class="mt-3">
-            <h3><strong>Customer Reviews</strong></h3>
-            <hr>
-            <form action="#" method="POST">
+            <form action="{% url 'submit_review' product.id %}" method="POST">
                 {% csrf_token %}
-                <h5 class="my-2"><stong>Write Your Review</stong></h5>
+                <h4 class="my-1">
+                    <stong>Write A Review</stong>
+                </h4>
                 <div>
                     <!-- Ratings stars -->
                     <label>Please provide your rating for this product</label>
                     <br>
                     <div class="rate">
-                        <input type="radio" name="rating" id="rating10" value="5" required><label for="rating10" title="5"></label>
-                        <input type="radio" name="rating" id="rating9" value="4.5" required><label for="rating9" title="4.5" class="half"></label>
-                        <input type="radio" name="rating" id="rating8" value="4" required><label for="rating8" title="4"></label>
-                        <input type="radio" name="rating" id="rating7" value="3.5" required><label for="rating7" title="3.5" class="half"></label>
-                        <input type="radio" name="rating" id="rating6" value="3" required><label for="rating6" title="3"></label>
-                        <input type="radio" name="rating" id="rating5" value="2.5" required><label for="rating5" title="2.5" class="half"></label>
-                        <input type="radio" name="rating" id="rating4" value="2" required><label for="rating4" title="2"></label>
-                        <input type="radio" name="rating" id="rating3" value="1.5" required><label for="rating3" title="1.5" class="half"></label>
-                        <input type="radio" name="rating" id="rating2" value="1" required><label for="rating2" title="1"></label>
-                        <input type="radio" name="rating" id="rating1" value="0.5" required><label for="rating1" title="0.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating10" value="5" required><label for="rating10"
+                            title="5"></label>
+                        <input type="radio" name="rating" id="rating9" value="4.5" required><label for="rating9"
+                            title="4.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating8" value="4" required><label for="rating8"
+                            title="4"></label>
+                        <input type="radio" name="rating" id="rating7" value="3.5" required><label for="rating7"
+                            title="3.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating6" value="3" required><label for="rating6"
+                            title="3"></label>
+                        <input type="radio" name="rating" id="rating5" value="2.5" required><label for="rating5"
+                            title="2.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating4" value="2" required><label for="rating4"
+                            title="2"></label>
+                        <input type="radio" name="rating" id="rating3" value="1.5" required><label for="rating3"
+                            title="1.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating2" value="1" required><label for="rating2"
+                            title="1"></label>
+                        <input type="radio" name="rating" id="rating1" value="0.5" required><label for="rating1"
+                            title="0.5" class="half"></label>
                     </div>
                     <br>
                     Review Title:
@@ -129,20 +138,54 @@
                     Review:
                     <textarea name="review" id="" rows="5" class="form-control" required></textarea>
                     <br>
+                    {% if user.is_authenticated %}
+                    {% if orderproduct %}
                     <input type="submit" value="Submit Review" class="btn btn-outline-black my-1">
-
-                </div>
+                    {% else %}
+                    <p>You can only review this product if you have purchased it.</p>
+                    {% endif %}
+                    {% else %}
+                    <p>You must be logged in to post a review. <span><a href="{% url 'account_login' %}">Sign in</a></span></p>
+                    {% endif %}
+                    </div>
             </form>
+            <br>
+            <!-- Customer reviews -->
+            <header>
+                <h4>Customer Reviews </h4>
+                
+            </header>
+            {% for review in reviews %}
+				<card class="box mt-3">
+					<div class="w-100">
 
-
+						<div class="text">
+							<span class="date text-muted float-md-right">{{ review.updated_on }}</span>
+							<h6 class="mb-1">{{ review.user }}</h6>
+							<div class="rating-star">
+								<span>
+									<i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+								</span>
+							</div>
+						</div>
+					</div> 
+                    <div class="mt-3">
+						<h6 class="border">{{ review.subject }}</h6>
+						<p class="border">
+							{{ review.review }}
+						</p>
+					</div>
+				</card>
+{% endfor %}
         </div>
-
     </div>
+    {% endblock %}
 
-</div>
-{% endblock %}
-
-{% block postloadjs %}
-{{ block.super }}
-{% include 'includes/quantity_input_script.html' %}
-{% endblock %}
+    {% block postloadjs %}
+    {{ block.super }}
+    {% include 'includes/quantity_input_script.html' %}
+    {% endblock %}

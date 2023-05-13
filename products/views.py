@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 
 from .models import Product, Category
+from reviews.models import ReviewRating
 from .forms import ProductForm
 
 
@@ -67,9 +68,11 @@ def product_detail(request, product_id):
     """ A view to show individual product detail """
 
     product = get_object_or_404(Product, pk=product_id)
+    reviews = ReviewRating.objects.filter(product_id=product.id, status=True)
 
     context = {
         'product': product,
+        'reviews': reviews,
     }
 
     return render(request, 'products/product_detail.html', context)

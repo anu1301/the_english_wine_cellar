@@ -30,6 +30,7 @@ urlpatterns = [
     path('profile/', include('profiles.urls')),
     path('booking/', include('booking.urls')),
     path('wishlist/', include('wishlist.urls')),
+    path('reviews/', include('reviews.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'english_wine_cellar.views.handler404'
