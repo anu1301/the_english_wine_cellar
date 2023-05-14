@@ -76,7 +76,7 @@
                                             id="id_date_{{ item.item_id }}">
                                     </div>
                                     <a class="remove-item text-danger float-right"
-                                        id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
+                                            id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
                                 </div>
                             </td>
                         </form>
@@ -84,7 +84,6 @@
                             <p class="my-0">£{{ item.experience.price|calc_subtotal:item.quantity }}</p>
                         </td>
                     </tr>
-
                     {% endfor %}
                     <tr>
                         <td colspan="6" class="pt-5 text-right">
@@ -147,12 +146,11 @@
                     };
 
                     $.post(url, data).done(function () {
-                        location.reload();
+                            location.reload();
                     });
                 })
             </script>
             <script>
-                // Java Script to prevent past dates being selected
                 window.addEventListener('load', () => {
                     const inputs = document.getElementsByTagName('input');
                     for (let i = 0; i < inputs.length; i++) {

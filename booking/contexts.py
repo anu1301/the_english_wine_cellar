@@ -25,7 +25,8 @@ def booking_contents(request):
             booking_items.append({
                 'item_id': item_id,
                 'quantity': num_people,
-                'product': experience,
+                'experience': experience,
+                'date': date_val,
             })
 
     context = {
