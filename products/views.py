@@ -6,6 +6,7 @@ from django.db.models.functions import Lower
 
 from .models import Product, Category
 from reviews.models import ReviewRating
+from checkout.models import OrderLineItem
 from .forms import ProductForm
 
 
@@ -69,13 +70,36 @@ def product_detail(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     reviews = ReviewRating.objects.filter(product_id=product.id, status=True)
+    orders = OrderLineItem.objects.filter(
+        product=product
+    )
+    print(request)
+    print("orders", orders)
+    user_has_purchased = False
+    for order in orders:
+        if order.order.user_profile == request.user:
+            user_hase_purchase = True
 
     context = {
         'product': product,
         'reviews': reviews,
+        'orderproduct': user_has_purchased,
     }
 
     return render(request, 'products/product_detail.html', context)
+
+    # product = get_object_or_404(Product, pk=product_id)
+    # reviews = ReviewRating.objects.filter(product_id=product.id, status=True)
+    # orders = OrderLineItem.objects.filter(
+    #     product=product,
+    # )
+
+    # context = {
+    #     'product': product,
+    #     'reviews': reviews,
+    # }
+
+    # return render(request, 'products/product_detail.html', context)
 
 
 @login_required

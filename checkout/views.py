@@ -11,6 +11,7 @@ from products.models import Product
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from bag.contexts import bag_contents
+from booking.contexts import booking_contents
 
 import stripe
 import json
@@ -94,15 +95,18 @@ def checkout(request):
             messages.error(request, 'There was an error with your form. \
                 Please check your information again.')
     else:
+        booking = request.session.get('booking', {})
         bag = request.session.get('bag', {})
-        if not bag:
+        if not bag and not booking:
             messages.error(
-                request, 'There is nothing in your basket at the moment.')
+                request,
+                'There is nothing in your basket/booking at the moment.')
             # prevents manual access to URL by typing /checkout
             return redirect(reverse('products'))
 
         current_bag = bag_contents(request)
-        total = current_bag['grand_total']
+        current_experiences = booking_contents(request)
+        total = current_bag['grand_total'] + current_experiences["booking_total"]
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(

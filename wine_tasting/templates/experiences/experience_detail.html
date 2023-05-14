@@ -21,6 +21,10 @@
                     <img class="card-img-top img-fluid rounded-5" src="{{ experience.image.url }}"
                         alt="{{ experiences.name }}">
                 </a>
+                {% elif experience.image_url %}
+                    <a href="{% url 'experience_detail' experience.id %}">
+                        <img class="card-img-top img-fluid rounded-5 wine-tasting-img" src="{{ experience.image_url }}" alt="{{ experience.name }}">
+                    </a>
                 {% else %}
                 <a href="{{ experience.image }}" target="_blank">
                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ experience.name }}">
@@ -54,16 +58,16 @@
                             <p class="mt-2">Select booking date</p>
                             <!-- Input group containing date input -->
                             <div class="input-group {{ bookingitem.id }} border-black">
-                                <input 
-                                class="form-control date_input" 
-                                type="date" 
-                                name="date"
-                                value="{{ booking.booking_date }}" 
-                                data-date-format="dd/mmm/yyyy"
-                                data-item_id="{{ bookingitem.id }}" 
-                                id="id_date_{{ bookingitem.id }}" 
-                                required
-                                >
+                                <input
+                                    class="form-control date_input"
+                                    type="date"
+                                    name="date"
+                                    value="{{ booking.booking_date }}"
+                                    data-date-format="dd/mmm/yyyy"
+                                    data-item_id="{{ bookingitem.id }}"
+                                    id="id_date_{{ bookingitem.id }}"
+                                    required
+                                />
                             </div>
                             <div class="col-12">
                                 <input type="submit" class="btn btn-black rounded-5 text-uppercase mt-3"
@@ -93,8 +97,8 @@
 </div>
 {% endblock %}
 {% block postloadjs %}
-{{ block.super }}
-<script type="text/javascript">
+{{ block.super }}   
+<script>
     window.addEventListener('load', () => {
         const inputs = document.getElementsByTagName('input');
         for (let i = 0; i < inputs.length; i++) {
