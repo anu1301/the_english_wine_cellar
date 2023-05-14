@@ -26,11 +26,15 @@
                         <div class="card h-100 border-0">
                             {% if experience.image %}
                                 <a href="{% url 'experience_detail' experience.id %}">
-                                    <img class="card-img-top img-fluid rounded-5" src="{{ experience.image.url }}" alt="{{ experience.name }}">
+                                    <img class="card-img-top img-fluid rounded-5 wine-tasting-img" src="{{ experience.image.url }}" alt="{{ experience.name }}">
+                                </a>
+                            {% elif experience.image_url %}
+                                <a href="{% url 'experience_detail' experience.id %}">
+                                    <img class="card-img-top img-fluid rounded-5 wine-tasting-img" src="{{ experience.image_url }}" alt="{{ experience.name }}">
                                 </a>
                             {% else %}
                                 <a href="{% url 'experience_detail' experience.id %}">
-                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png"
+                                    <img class="card-img-top img-fluid wine-tasting-img" src="{{ MEDIA_URL }}noimage.png"
                                         alt="{{ experience.name }}">
                                 </a>
                             {% endif %}
