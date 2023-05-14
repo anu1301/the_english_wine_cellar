@@ -130,6 +130,16 @@ if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
+elif "DATABASE_DETAILS_PRESENT" in os.environ and os.environ.get("DATABASE_DETAILS_PRESENT") == "True":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get("DATABASE_DB"),
+            'USER': os.environ.get("DATABASE_NAME"),
+            'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
+            'HOST': os.environ.get("DATABASE_HOST"),
+        }
+    }
 else:
     DATABASES = {
         'default': {

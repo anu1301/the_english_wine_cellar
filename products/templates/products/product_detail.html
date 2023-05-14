@@ -18,6 +18,10 @@
                 <a href="{{ product.image.url }}" target="_blank">
                     <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
                 </a>
+                {% elif product.image_url %}
+                <a href="{% url 'product_detail' product.id %}">
+                    <img class="card-img-top img-fluid" src="{{ product.image_url }}" alt="{{ product.name }}">
+                </a>
                 {% else %}
                 <a href="">
                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
@@ -86,9 +90,6 @@
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
-                            <!-- Add to wishlist -->
-                            <!-- <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-black rounded-5 text-uppercase mt-5" role="button">Add to Wish List</a> -->
-                            <!-- Add to bag button -->
                             <input type="submit" class="btn btn-black rounded-5 text-uppercase mt-5" value="Add to Bag">
                         </div>
                         <!-- Redirects user back to the same page once product added to the shopping basket -->

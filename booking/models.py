@@ -30,7 +30,8 @@ class Booking(models.Model):
         UserProfile, on_delete=models.SET_NULL, null=True, blank=True,
         related_name='booking')
     booking_ref = models.CharField(
-        primary_key=True, max_length=32, null=False, editable=False, default='')
+        primary_key=True, max_length=32,
+        null=False, editable=False, default='')
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
@@ -58,7 +59,8 @@ class Booking(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Overides the original save method to set the booking ref if it hasn't been set already
+        Overides the original save method to set the booking ref 
+        if it hasn't been set already
         """
 
         if not self.booking_ref:
@@ -67,7 +69,6 @@ class Booking(models.Model):
 
         def __str__(self):
             return self.booking_ref
-
 
     # def validate_date(value):
     #     date = self.booking_date
@@ -82,17 +83,20 @@ class Booking(models.Model):
 
 class BookingItem(models.Model):
     bookings = models.ForeignKey(
-        Booking, null=False, blank=False, on_delete=models.CASCADE, related_name='bookingitem')
+        Booking, null=False, blank=False, on_delete=models.CASCADE,
+        related_name='bookingitem')
     experience = models.ForeignKey(
-         Experiences, null=False, blank=False, on_delete=models.CASCADE)
+        Experiences, null=False, blank=False, on_delete=models.CASCADE)
     number_of_people = models.IntegerField(
-          default=1, null=False, blank=False)
+        default=1, null=False, blank=False)
     bookingitem_total = models.DecimalField(
-           max_digits=10, decimal_places=2, null=False, blank=False, editable=False)
+        max_digits=10, decimal_places=2, null=False,
+        blank=False, editable=False)
 
     def save(self, *args, **kwargs):
         """
-        Overrides the original save method to set the bookingitem total and updates the booking total
+        Overrides the original save method to set the bookingitem total 
+        and updates the booking total
         """
         self.bookingitem_total = Decimal(
             self.experience.price * self.number_of_people)

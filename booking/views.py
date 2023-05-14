@@ -68,19 +68,20 @@ def remove_from_booking(request, item_id):
     """ Removes specified experience from the booking """
     try:
         experience = get_object_or_404(Experiences, pk=item_id)
-        date = str(request.POST.get('date'))
         booking = request.session.get('booking', {})
 
-        if 'item_id' in request.POST:
-            del booking[item_id]['items_by_date'][date]
-            if not booking[item_id]['items_by_date']:
-                booking.pop(item_id)
-                messages.success(
-                    request, f'Removed {experience.name} from your booking')
-        else:
+        # if 'item_id' in request.POST:
+        #     del booking[item_id]['items_by_date'][date]
+        #     if not booking[item_id]['items_by_date']:
+        #         booking.pop(item_id)
+        #         messages.success(
+        #             request, f'Removed {experience.name} from your booking')
+        # else:
+        #     booking.pop(item_id)
+        #     messages.success(
+        #         request, f'Removed {experience.name} from your booking')
+        if booking[item_id]:
             booking.pop(item_id)
-            messages.success(
-                request, f'Removed {experience.name} from your booking')
 
         request.session['booking'] = booking
         return HttpResponse(status=200)
