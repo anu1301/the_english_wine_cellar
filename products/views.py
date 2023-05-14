@@ -73,12 +73,10 @@ def product_detail(request, product_id):
     orders = OrderLineItem.objects.filter(
         product=product
     )
-    print(request)
-    print("orders", orders)
     user_has_purchased = False
     for order in orders:
-        if order.order.user_profile == request.user:
-            user_hase_purchase = True
+        if order.order.user_profile.id == request.user.id:
+            user_has_purchased = True
 
     context = {
         'product': product,
