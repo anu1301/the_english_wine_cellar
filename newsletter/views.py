@@ -1,6 +1,7 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from .models import NewsLetterSub
+from .forms import NewsLetterForm
 
 
 def newsletter_sub(request):
@@ -19,10 +20,12 @@ def newsletter_sub(request):
                 instance.save()
                 messages.success(request, 'Thank you for signing up for a \
                     subscription to our newsletter')
+
                 return redirect(reverse('home'))
 
     context = {
         'form': form,
     }
 
-    return render(request, 'customer/newsletter.html', context)
+    return render(request, 'newsletter/newsletter.html', context)
+   

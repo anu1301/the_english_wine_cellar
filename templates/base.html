@@ -160,11 +160,11 @@
                 <div class="col-md-6 mt-md-0 mb-3">
                     <h5 class="text-white mb-3">Newsletter</h5>
                     <p class="small text-white">Subsribe to our newletter!</p>
-                    <form class="newsletter-form" action="" method="POST">
+                    <form class="newsletter-form" action="{% url 'newsletter' %}" method="POST">
                       {% csrf_token %}
                         <div class="input-group mb-3">
                             <input class="form-control" type="email" name="email" placeholder="Enter your email address"
-                                aria-label="Recipient's email" aria-describedby="subscribe-button">
+                                aria-label="Subscriber's email" aria-describedby="subscribe-button">
                             <button class="btn btn-black" id="subscribe-button" type="submit">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
