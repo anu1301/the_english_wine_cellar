@@ -126,7 +126,8 @@
         </div>
         <div id="delivery-banner" class="row text-center">
             <div class="col bg-black text-white">
-                <h6 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h6>                
+                <h5 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h5>
+                <p class="small">This does not include the purchase of experiences</p>    
             </div>            
         </div>
     </header>
@@ -176,17 +177,17 @@
                 <div class="col-md-3 mb-md-0 mb-3">
                     <h5 class="text-uppercase">Business</h5>
                     <ul class="list-unstyled">
-                        
+
                         <li>
-                            <a href="" class="text-white">Contact Us</a>
+                            <a href="{% url 'account_signup' %}" class="text-white">Register</a>
                         </li>
 
                         <li>
-                            <a href="" class="text-white">Register</a>
+                            <a href="{% url 'account_login' %}" class="text-white">Login</a>
                         </li>
-
                         <li>
-                            <a href="" class="text-white">Login</a>
+                            <a href="https://www.drinkaware.co.uk/" class="text-white">drinkaware</a>
+                            <p class="small"><em>Please buy and drink alcohol responsibly</em></p>
                         </li>
                     </ul>
                 </div>
@@ -213,7 +214,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-copyright text-center py-3">This site was made for educational purposes only.</div>
+        <div class="footer-copyright text-center py-3">This site has been made for educational purposes only.</div>
     </footer>
 
 

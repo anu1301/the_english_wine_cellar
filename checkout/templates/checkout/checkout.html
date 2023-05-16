@@ -37,29 +37,29 @@
             </div>
             {% for item in booking_items %}
             <div class="row">
-                <div class="col-2 mb-1">
-                    <a href="{% url 'product_detail' item.product.id %}">
-                        {% if item.product.image %}
-                            <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
-                        {% elif item.product.image_url %}
-                            <img class="w-100" src="{{ item.product.image_url }}" alt="{{ product.name }}">
+                <div class="col-2 mb-3">
+                    <a href="{% url 'experience_detail' item.experience.id %}">
+                        {% if item.experience.image %}
+                            <img class="w-100" src="{{ item.experience.image.url }}" alt="{{ product.name }}">
+                        {% elif item.experience.image_url %}
+                            <img class="w-100" src="{{ item.experience.image_url }}" alt="{{ product.name }}">
                         {% else %}
                             <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                         {% endif %}
                     </a>
                 </div>
-                <div class="col-7">
-                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                <div class="col-7 mb-3">
+                    <p class="my-0"><strong>{{ item.experience.name }}</strong></p>
                     <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
                 </div>
                 <div class="col-3 text-right">
-                    <p class="my-0 small text-muted">£{{ item.product.price | calc_subtotal:item.quantity }}</p>
+                    <p class="my-0 small text-muted">£{{ item.experience.price | calc_subtotal:item.quantity }}</p>
                 </div>
             </div>
             {% endfor %}
             {% for item in bag_items %}
             <div class="row">
-                <div class="col-2 mb-1">
+                <div class="col-2 mb-3">
                     <a href="{% url 'product_detail' item.product.id %}">
                         {% if item.product.image %}
                             <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
@@ -70,7 +70,7 @@
                         {% endif %}
                     </a>
                 </div>
-                <div class="col-7">
+                <div class="col-7 mb-3">
                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                     <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
                 </div>
@@ -147,6 +147,12 @@
                         </span>
                         <span class="font-weight-bold">Adjust Basket</span>
                     </a>
+                    <a href="{% url 'view_booking' %}" class="btn btn-outline-black rounded-5">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="font-weight-bold">Adjust Booking</span>
+                    </a>
                     <button id="submit-button" class="btn btn-black rounded-5">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
@@ -157,7 +163,7 @@
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>
                         </span>
-                        <span>Your card will be charged <strong>£{{ grand_total|floatformat:2 }}</strong></span>
+                        <span>Your card will be charged <strong>£{{ grand_total|add:booking_total|floatformat:2 }}</strong></span>
                     </p>
                 </div>
 
