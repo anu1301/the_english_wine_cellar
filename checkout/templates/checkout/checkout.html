@@ -63,6 +63,8 @@
                     <a href="{% url 'product_detail' item.product.id %}">
                         {% if item.product.image %}
                             <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                        {% elif item.product.image_url %}
+                            <img class="w-100" src="{{ item.product.image_url }}" alt="{{ product.name }}">
                         {% else %}
                             <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                         {% endif %}
@@ -145,12 +147,6 @@
                         </span>
                         <span class="font-weight-bold">Adjust Basket</span>
                     </a>
-                    <a href="{% url 'view_booking' %}" class="btn btn-outline-black rounded-5">
-                        <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span class="font-weight-bold">Adjust Booking</span>
-                    </a>
                     <button id="submit-button" class="btn btn-black rounded-5">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
@@ -161,7 +157,7 @@
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>
                         </span>
-                        <span>Your card will be charged <strong>£{{ grand_total|add:booking_total |floatformat:2 }}</strong></span>
+                        <span>Your card will be charged <strong>£{{ grand_total|floatformat:2 }}</strong></span>
                     </p>
                 </div>
 

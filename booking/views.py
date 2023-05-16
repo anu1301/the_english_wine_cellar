@@ -64,54 +64,21 @@ def adjust_booking(request, item_id):
     return redirect(reverse('view_booking'))
 
 
-# def remove_from_booking(request, item_id):
-#     """ Removes specified experience from the booking """
+def remove_from_booking(request, item_id):
+    """ Removes specified experience from the booking """
+    try:
+        experience = get_object_or_404(Experiences, pk=item_id)
+        booking = request.session.get('booking', {})
 
-    # try:
-    #     experience = get_object_or_404(Experiences, pk=item_id)
-    #     booking = request.session.get('booking', {})
+        if booking[item_id] == booking[item_id]['items_by_date']:
+            booking.pop(item_id)
 
-        # if 'item_id' in request.POST:
-        #     del booking[item_id]['items_by_date'][date]
-        #     if not booking[item_id]['items_by_date']:
-        #         booking.pop(item_id)
-        #         messages.success(
-        #             request, f'Removed {experience.name} from your booking')
-        # else:
-        #     booking.pop(item_id)
-        #     messages.success(
-        #         request, f'Removed {experience.name} from your booking')
-    #     if booking[item_id]:
-    #         booking.pop(item_id)
+        request.session['booking'] = booking
+        return HttpResponse(status=200)
 
-    #     request.session['booking'] = booking
-    #     return HttpResponse(status=200)
-
-    # except Exception as e:
-    #     messages.error(request, f'Error removing item: {e}')
-    #     return HttpResponse(status=500)
-
-    # try:
-    #     experience = get_object_or_404(Experiences, pk=item_id)
-    #     date = str(request.POST.get('date'))
-    #     booking = request.session.get('booking', {})
-
-    #     del booking[item_id]["items_by_date"][date]
-    #     if not booking[item_id]['items_by_date']:
-    #         bag.pop(item_id)
-    #         messages.success(
-    #             request, f'Removed {experience.name} from your booking')
-    #     else:
-    #         booking.pop(item_id)
-    #         messages.success(
-    #             request, f'Removed {experience.name} from your booking')
-
-    #     request.session['booking'] = booking
-    #     return HttpResponse(status=200)
-
-    # except Exception as e:
-    #     messages.error(request, f'Error removing item: {e}')
-    #     return HttpResponse(status=500)
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)
 
 
 # # def booking_out(request):

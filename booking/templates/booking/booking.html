@@ -151,6 +151,7 @@
                 })
             </script>
             <script>
+                // Prevents date in the past being selected
                 window.addEventListener('load', () => {
                     const inputs = document.getElementsByTagName('input');
                     for (let i = 0; i < inputs.length; i++) {

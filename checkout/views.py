@@ -94,13 +94,14 @@ def checkout(request):
         else:
             messages.error(request, 'There was an error with your form. \
                 Please check your information again.')
+
+    # For any other request that is not a post
     else:
         booking = request.session.get('booking', {})
         bag = request.session.get('bag', {})
         if not bag and not booking:
             messages.error(
-                request,
-                'There is nothing in your basket/booking at the moment.')
+                request, 'There is nothing in your basket at the moment.')
             # prevents manual access to URL by typing /checkout
             return redirect(reverse('products'))
 
