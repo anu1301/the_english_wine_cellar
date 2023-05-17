@@ -123,12 +123,12 @@
                 </span>
                 <span>Why not browse our cellar</span>
             </a>
-            {% endif %}
-            {% endblock %}
-            {% block postloadjs %}
-            {{ block.super }}
-            {% include 'includes/quantity_input_script.html' %}
-            <script type="text/javascript">
+{% endif %}
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+{% include 'includes/quantity_input_script.html' %}
+<script type="text/javascript">
                 // Update quantity/date on click
                 $('.update-link').click(function (e) {
                     var form = $('.update-form');
@@ -139,10 +139,12 @@
                 $('.remove-item').click(function (e) {
                     var csrfToken = "{{ csrf_token }}";
                     var itemId = $(this).attr('id').split('remove_')[1];
+                    var date = $(this).data('date');
+                    var quantity = $(this).data('quantity');
                     var url = `/booking/remove/${itemId}/`;
                     console.log(url);
                     var data = {
-                        'csrfmiddlewaretoken': csrfToken
+                        'csrfmiddlewaretoken': csrfToken,
                     };
 
                     $.post(url, data).done(function () {
@@ -162,4 +164,4 @@
                     }
                 });
             </script>
-            {% endblock %}
+{% endblock %}

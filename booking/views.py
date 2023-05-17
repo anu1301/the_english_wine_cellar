@@ -25,7 +25,7 @@ def add_to_booking(request, item_id):
     booking = request.session.get('booking', {})
 
     if item_id in list(booking.keys()):
-        if date in booking[item_id]['items_by_date'].keys():
+        if item_id and date in booking[item_id]['items_by_date'].keys():
             booking[item_id]['items_by_date'][date] += quantity
             messages.success(
                 request, f'Updated {experience.name} quantity to {booking[item_id]}')
@@ -51,12 +51,13 @@ def adjust_booking(request, item_id):
     booking = request.session.get('booking', {})
 
     if quantity > 0:
-        booking[item_id] = {'items_by_date': {date: quantity}}
+        # booking[item_id] = {'items_by_date': {date: quantity}}
+        booking[item_id]['items_by_date'][date] = quantity
         messages.success(request, f'Updated {experience.name} in your booking')
     else:
         del booking[item_id]['items_by_date'][date]
-        if not booking[item_id]['items_by_date']:
-            booking.pop(item_id)
+        if not booking[item_id]['items_by_date'][date]:
+            booking.pop(booking[item_id]['items_by_date'].keys())
             messages.success(
                 request, f'Removed {experience.name} from your booking')
 
@@ -68,9 +69,10 @@ def remove_from_booking(request, item_id):
     """ Removes specified experience from the booking """
     try:
         experience = get_object_or_404(Experiences, pk=item_id)
+        date = str(request.POST.get('date'))
         booking = request.session.get('booking', {})
 
-        if booking[item_id] == booking[item_id]['items_by_date']:
+        if date in booking[item_id]['items_by_date']:
             booking.pop(item_id)
 
         request.session['booking'] = booking
