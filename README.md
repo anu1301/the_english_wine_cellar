@@ -123,7 +123,63 @@ There are some features that were not completed, (or are still work in progress)
 
 
 ## Wireframes
+<details>
+    <summary></summary>
 
+Home
+![home_page](documentation_assets/images/home_page.png)
+
+Product
+![product_page](documentation_assets/images/product_page.png)
+
+Product detail
+![product_detail_page](documentation_assets/images/product_detail.png)
+
+Wine tasting experience
+![wine_tasting_experience_page](documentation_assets/images/wine_tasting_experience_page.png)
+
+Wine tasting experience detail
+![wine_tasting_experience-detail_page](documentation_assets/images/wine_tasting_product_detail.png)
+
+Basket
+![basket_page](documentation_assets/images/basket.png)
+
+Checkout
+![checkout_page](documentation_assets/images/checkout_customer_Info.png)
+
+![checkout_page](documentation_assets/images/checkout_payment.png)
+
+![checkout_page](documentation_assets/images/checkout_success.png)
+
+Email Confirmation
+![email_confirmation_page](documentation_assets/images/email_confirmation.png)
+
+Login
+![login_page](documentation_assets/images/login.png)
+
+Register
+![register_page](documentation_assets/images/register.png)
+
+Mobile frames
+![mobile](documentation_assets/images/mobile_home_landing_page.png)
+
+![mobile](documentation_assets/images/mobile_product_page.png)
+
+![mobile](documentation_assets/images/mobile_product_detail_page.png)
+
+![mobile](documentation_assets/images/mobile_shopping_basket.png)
+
+![mobile](documentation_assets/images/mobile_checkout.png)
+
+![mobile](documentation_assets/images/mobile_checkout_payment.png)
+
+![mobile](documentation_assets/images/mobile_checkout_success.png)
+
+![mobile](documentation_assets/images/mobile_login.png)
+
+![mobile](documentation_assets/images/mobile_register.png)
+
+</details>
 
 
 ## Surface
