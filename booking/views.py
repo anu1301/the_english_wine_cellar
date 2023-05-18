@@ -51,8 +51,8 @@ def adjust_booking(request, item_id):
     booking = request.session.get('booking', {})
 
     if quantity > 0:
-        # booking[item_id] = {'items_by_date': {date: quantity}}
-        booking[item_id]['items_by_date'][date] = quantity
+        booking[item_id] = {'items_by_date': {date: quantity}}
+        # booking[item_id]['items_by_date'][date] = quantity
         messages.success(request, f'Updated {experience.name} in your booking')
     else:
         del booking[item_id]['items_by_date'][date]
@@ -72,7 +72,7 @@ def remove_from_booking(request, item_id):
         date = str(request.POST.get('date'))
         booking = request.session.get('booking', {})
 
-        if date in booking[item_id]['items_by_date']:
+        if booking[item_id]['items_by_date']:
             booking.pop(item_id)
 
         request.session['booking'] = booking

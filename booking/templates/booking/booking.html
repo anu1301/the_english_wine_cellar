@@ -76,7 +76,7 @@
                                             id="id_date_{{ item.item_id }}">
                                     </div>
                                     <a class="remove-item text-danger float-right"
-                                            id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
+                                        id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
                                 </div>
                             </td>
                         </form>
@@ -123,45 +123,48 @@
                 </span>
                 <span>Why not browse our cellar</span>
             </a>
-{% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
 {% include 'includes/quantity_input_script.html' %}
 <script type="text/javascript">
-                // Update quantity/date on click
-                $('.update-link').click(function (e) {
-                    var form = $('.update-form');
-                    form.submit();
-                })
+    // Update quantity/date on click
+    $('.update-link').click(function (e) {
+        var form = $('.update-form');
+        form.submit();
+    })
 
-                // Remove item and reload on click()
-                $('.remove-item').click(function (e) {
-                    var csrfToken = "{{ csrf_token }}";
-                    var itemId = $(this).attr('id').split('remove_')[1];
-                    var date = $(this).data('date');
-                    var quantity = $(this).data('quantity');
-                    var url = `/booking/remove/${itemId}/`;
-                    console.log(url);
-                    var data = {
-                        'csrfmiddlewaretoken': csrfToken,
-                    };
+    // Remove item and reload on click()
+    $('.remove-item').click(function (e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var date = $(this).data('date');
+        var quantity = $(this).data('quantity');
+        var url = `/booking/remove/${itemId}/`;
+        console.log(url);
+        var data = {
+            'csrfmiddlewaretoken': csrfToken,
+        };
 
-                    $.post(url, data).done(function () {
-                            location.reload();
-                    });
-                })
-            </script>
-            <script>
-                // Prevents date in the past being selected
-                window.addEventListener('load', () => {
-                    const inputs = document.getElementsByTagName('input');
-                    for (let i = 0; i < inputs.length; i++) {
-                        let input = inputs[i];
-                        if (input.name === 'date') {
-                            input.min = new Date().toISOString().split("T")[0];
-                        }
-                    }
-                });
-            </script>
+        $.post(url, data).done(function () {
+            location.reload();
+        });
+    })
+</script>
+<script>
+    // Prevents date in the past being selected
+    window.addEventListener('load', () => {
+        const inputs = document.getElementsByTagName('input');
+        for (let i = 0; i < inputs.length; i++) {
+            let input = inputs[i];
+            if (input.name === 'date') {
+                input.min = new Date().toISOString().split("T")[0];
+            }
+        }
+    });
+</script>
 {% endblock %}

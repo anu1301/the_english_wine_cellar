@@ -64,6 +64,7 @@ Journey Map - touch points:
   
 ## User Stories Epics & Sprints
 
+
 ## Database Schema (ERD)
 
 ## Wireframes
@@ -83,5 +84,162 @@ Journey Map - touch points:
 ## Testing & Validating
 
 ## Deployment
+## Deployment
+
+### PostgreSQL Database
+
+<details>
+    <summary></summary>
+
+Whilst in mid-project I followed steps provided by the Code Institute to migrate the database from the Heroku version to Elephant. 
+
+1. If using Elephant, navigate to elephantsql.com and click 'Get a managed database today'. When presented with options for differing plans, I chose the free 'Tiny Turtle' plan.
+2. Select “Log in with GitHub” and authorize ElephantSQL with your selected GitHub account.
+3. In the Create new team form:
+    * Add a team name (your own name is fine).
+    * Read and agree to the Terms of Service.
+    * Select Yes for GDPR.
+    * Provide your email address.
+    * Click “Create Team”.
+4. Your account should now be created.
+5. Now you will need to create your database. Navigate to your elephantsql.com dashboard, and click "Create New Instance".
+6. Set up your plan:
+    * Give your plan a Name (this is commonly the name of the project).
+    * Select the Tiny Turtle (Free) plan.
+    * You can leave the Tags field blank.
+7. Select a data center near you.
+8. Then click "Review".
+9. Check your details are correct and then click "Create Instance".
+10. Return to the ElephantSQL dashboard and click on the database instance name for this project.
+11. You will return to this projects dashboard as part of the steps to 'Deploy with Heroku' as you will need the DATABASE_URL.
+
+</details>
+
+### Gmail SMTP
+
+<details>
+    <summary>
+
+Gmail SMTP has been used to send order confirmations and user contact emails in the deployed version. To use this configuration, copy and adapt the code below into your settings.py file.
+
+```
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = '(ADD YOUR EMAIL ADDRESS)@gmail.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER =  os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+```
+</summary>
+</details>
+
+
+### Amazon Web Services (AWS) Storage
+
+<details>
+    <summary>
+Considering the development of the site could require a significant volume of product images, AWS has been used as the cloud host for imagery. To implement this you will need and AWS account and to create an S3 Bucket and User Profile. Developer guidance can be followed on AWS's site.
+
+To serve the images you will need to add the following config to your settings.py file.
+
+```
+if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+    # Bucket config
+    AWS_STORAGE_BUCKET_NAME = 'the-coffee-collective'
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+    # Override static and media URLs in Production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}'
+```
+</summary>
+</details>
+
+
+### Stripe
+
+<details>
+    <summary></summary>
+
+Stripe has been used to receive payments from customers. To implement you need to have an account with Stripe and follow the [documentation](https://stripe.com/docs) add incorporate the guided HTML, Python and JavaScript code. Be sure to add the secret key generated with Stripe to your Heroku Config Variables.
+
+Once Stripe is activate you can test the checkout process with a test credit card detail provided by Stripe. Please use these details (below) and not real card details as there is no guarantee monies can be returned as this is a fictitious site.
+
+| CARD NO             | MM / YY | CVC | Post Code |
+| ------------------- | ------- | --- | --------- |
+| 4242 4242 4242 4242 | 04 / 24 | 242 | 42424     |
+
+</details>
+
+
+### Deploy with Heroku
+
+<details>
+    <summary></summary>
+
+1. Log in to Heroku at https://heroku.com - create an account if needed.
+2. From the Heroku dashboard, click the Create new app button. For a new account an icon will be visible on screen to allow you to Create an app, otherwise a link to this function is located under the New dropdown menu at the top right of the screen.
+3. On the Create New App page, enter a unique name for the application and select region. Then click Create app.
+4. On the Application Configuration page for the new app, click on the Resources tab.
+5. Next, click on Settings on the Application Configuration page and click on "Reveal Config Vars".
+6. Add a new Config Var called DISABLE_COLLECTSTATIC and assign it a value of 1, and click Add to save it. Remove this when releasing for Production.
+7. Add a new Config Var called SECRET_KEY and assign it a value - any random string of letters, digits and symbols, and click Add to save it.
+8. Add a new Config Var called DATABASE_URL and paste in the value for your ElephantSQL database, and click Add to save it.
+9. The settings.py file should be updated to use the DATABASE_URL and SECRET_KEY environment variable values as follows :
+
+        DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+
+        SECRET_KEY = os.environ.get('SECRET_KEY')
+
+10. In Gitpod, in the project terminal window, to initialize the data model in the postgres database, run the command : python3 manage.py migrate
+11. Update the requirements.txt file with all necessary supporting files by entering the command : pip freeze > requirements.txt
+12. Commit and push any local changes to GitHub.
+13. In order to be able to run the application on localhost, add SECRET_KEY and DATABASE_URL and their values to env.py
+
+Connect GitHub Repo to Heroku App
+
+1. Navigate to Application Configuration page for the application on Heroku and click on the Deploy tab.
+2. Select GitHub as the Deployment Method and if prompted, confirm that you want to connect to GitHub. Enter and search for the required repository, then click on Connect to link them up..
+3. Scroll down the page and choose to either Automatically Deploy each time changes are pushed to GitHub, or Manually deploy - I chose the latter for the initial deployment to watch the build and then opted for Automatic Deployment.
+4. The application can be run from the Application Configuration page by clicking on the Open App button.
+5. Each time you push code from your GitHub Repo it will be automatically reflected in your Heroku App.
+
+The url for this website can be found here https://the-coffee-collective.herokuapp.com/
+</details>
+
+
+### Pre Production Deployment
+
+<details>
+    <summary></summary>
+
+When you are ready to move to production, the following steps must be taken to ensure your site works correctly and is secure.
+
+In GitPod:
+1. Set DEBUG flag to False in settings.py
+2. Check the following line exists in settings.py: X_FRAME_OPTIONS = 'SAMEORIGIN'
+3. Update the requirements.txt file with all necessary supporting files by entering the command : pip freeze > requirements.txt
+4. Commit and push code to GitHub
+In the Heroku App:
+5. Settings > Config Vars : Delete environment variable : DISABLE_COLLECTSTATIC
+6. Deploy : Click on deploy branch
+</details>
 
 ## Credits & Acknowledgements
