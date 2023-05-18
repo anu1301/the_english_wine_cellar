@@ -128,9 +128,9 @@
                 {% include 'includes/main-nav.html' %}
             </nav>
         </div>
-        <div id="delivery-banner" class="row text-center">
+        <div id="delivery-banner" class="row text-center mb-5">
             <div class="col bg-black text-white">
-                <h5 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h5>
+                <h6 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h6>
                 <p class="small">This does not include the purchase of experiences</p>    
             </div>            
         </div>
@@ -190,9 +190,14 @@
                             <a href="{% url 'account_login' %}" class="text-white">Login</a>
                         </li>
                         <li>
+                            <a href="https://winegb.co.uk/" class="text-white" target="_blank" rel="noopener"
+                            aria-label="visit wines of great britain website (opens in a new page)">WineGB</a>
+                            <p class="small"><em>To learn more about UK wines</em></p>
+                        </li>
+                        <li>
                             <a href="https://www.drinkaware.co.uk/" class="text-white" target="_blank" rel="noopener"
                             aria-label="visit drinkaware website (opens in a new page)">drinkaware.co.uk</a>
-                            <p class="small"><em>For the facts. Drink alcohol responsibly</em></p>
+                            <p class="small"><em>Drink alcohol responsibly. For the facts visit drinkaware.</em></p>
                         </li>
                     </ul>
                 </div>
