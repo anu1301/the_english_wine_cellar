@@ -16,12 +16,6 @@ class BookingDate(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['booking_date'].required = True
 
-    # def clean_date(self):
-    #     date = self.cleaned_data['booking_date']
-    #     if date <= datetime.date.today():
-    #         raise forms.ValidationError("The date cannot be in the past!")
-    #     return date
-
     class Meta:
         """
         Uses Booking Model to create the booking form

@@ -116,6 +116,7 @@ There are some features that were not completed, (or are still work in progress)
 - Enable site owner to send out emails to newsletter subscribers
 - Add the ability for users to rate and review experiences
 - Add a facility for vouchers and discounts to be given in marketing the site and enable users to use them
+- Add ability for site owner to add, update and delete experiences from the frontend.
 
 ## Database Schema (ERD)
 
@@ -181,11 +182,19 @@ Mobile frames
 
 </details>
 
-
 ## Surface
 - Colour Scheme
+The following colour palette has been used for the website, giving it a sophisticated and elegant look. The colour scheme is simple and clean with great contrast. Splashes of colour are provided by the product and experience images.
+
+![colour_palette](documentation_assets/images/english_wine_colour_palette.png)
+
 - Typography
+The font family used is Lato due to its simplicity, which is in keeping with the site's overall feel. The font is also easy to read and unfussy.
+
 - Logo
+The logo was created through Wix, keeping the image simple and using the same palette as the website.
+
+![logo](media/tewc_logo.jpg)
 
 ## Features & Responsive Design
 

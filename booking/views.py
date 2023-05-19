@@ -28,7 +28,8 @@ def add_to_booking(request, item_id):
         if item_id and date in booking[item_id]['items_by_date'].keys():
             booking[item_id]['items_by_date'][date] += quantity
             messages.success(
-                request, f'Updated {experience.name} quantity to {booking[item_id]}')
+                request, f'Updated {experience.name} \
+                    quantity to {booking[item_id]}')
         else:
             booking[item_id]['items_by_date'][date] = quantity
             messages.success(
@@ -81,20 +82,3 @@ def remove_from_booking(request, item_id):
     except Exception as e:
         messages.error(request, f'Error removing item: {e}')
         return HttpResponse(status=500)
-
-
-# # def booking_out(request):
-# #     booking = request.session.get('booking', {})
-# #     if not booking:
-# #         messages.error(request, 'There is no booking')
-# #         return redirect(reverse('experiences'))
-
-# #     booking_form = BookingForm()
-# #     template = 'booking/booking_out.html'
-# #     context = {
-# #         'booking_form': booking_form,
-#         # 'stripe_public_key': stripe_public_key,
-#         # 'client_secret': intent.client_secret,
-#     # }
-
-#     # return render(request, template, context)

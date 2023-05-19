@@ -81,7 +81,8 @@ def checkout(request):
                             order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database."
+                        "One of the products in your bag wasn't found in our \
+                            database."
                         "Please contact us for further assistance!")
                     )
                     order.delete()
@@ -107,7 +108,8 @@ def checkout(request):
 
         current_bag = bag_contents(request)
         current_experiences = booking_contents(request)
-        total = current_bag['grand_total'] + current_experiences["booking_total"]
+        total = current_bag['grand_total'] + \
+            current_experiences["booking_total"]
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
