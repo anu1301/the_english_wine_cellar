@@ -1,7 +1,5 @@
 # ![TheEthicalWineCellar logo](/media/tewc_logo.jpg) The English Wine Cellar 
 
-![am I responsive] Image
-
 # Introduction
 The English Wine Cellar is an online retailer of English wines and wine accessories. They also provide wine tasting experiences to compliment their core business.
 
@@ -71,7 +69,6 @@ Journey Map - touch points:
 ## Development
 ## User Stories Epics & Sprints
 Github projects board was used to store the work backlog and as a Kanban board. Issues were created to replicate user story tickets, grouped into epics and sprints. Also the MoSCoW principle was used to prioritise the development of the site.
-
 #### User Stories
 <details>
     <summary></summary>
@@ -198,6 +195,38 @@ The logo was created through Wix, keeping the image simple and using the same pa
 
 ## Features & Responsive Design
 
+- Navigation bar:
+Contains the company logo, which is also a home link from anywhere on the site. It also contains links to other site pages, as well as a search bar. The account (registration, login, profile management and product management), booking and basket sessions are located far right.
+
+![nav_bar](documentation_assets/images/nav_bar.PNG)
+
+Both the booking and basket sessions change colour when there are items in them.
+
+In order to manage products frontend (rather than from the admin panel), the super user needs to login, at which point the link to the form for adding, updating and deleting products becomes visible.
+
+- Footer:
+Contains links to social media sites, along with links to login, register, drinkaware and WineGB (the latter two are external sites, giving credibility and authority to The English Wine Cellar). The footer also contains the newsletter form for subscribers and a link to un subscribe.
+
+![footer](documentation_assets/images/footer.PNG)
+
+
+![unsubscribe](documentation_assets/images/unsubscribe_newsletter.PNG)
+
+- Main body of the home page contains image links to the respective pages, which are clearly marked. There is also a call to action button, which links the user to the products page.
+
+![home](documentation_assets/images/links_to_products.PNG)
+
+- Contact details can be found on the wine tasting experience page. This includes a physical address and an embedded Google map, which is responsive.
+
+![address](documentation_assets/images/address_map.PNG)
+
+- The date picker in the experience detail page will not allow the user to select a date in the past. It is also a required field.
+
+![date](documentation_assets/images/past_date_blocked.png)
+
+- When the user checksout from the basket/booking, the experience and/or product will appear in the summary on the checkout form.
+
+![checkout_summary](documentation_assets/images/checkout_summary.PNG)
 
 
 ## Technologies
@@ -215,7 +244,20 @@ The logo was created through Wix, keeping the image simple and using the same pa
 -   GitHub - store project repository
 
 ## Marketing
-- SEO - keywords
+- Search Engine Optimisation (SEO):
+To enhance SEO for the site, keywords were added in a meta tag to the base.html. Key words were researched through WordTracker and similar sites.
+
+![seo_keywords](documentation_assets/images/seo_keywords.jpeg)
+
+Some of the words will have a high rate of competition, but the more unusual or long-tail keywords will have less competition for ranking.
+
+- Social Media:
+An attempt was made to create a Facebook page for the site but this was unsuccessful. However, a wireframe mock up has been created in anticipation of creating the actual page.
+
+![facebook](documentation_assets/images/facebook.png)
+
+Due to the coverage of Facebook, this would be a lucrative marketing and advertising avenue for the business.
+
 
 ## Testing & Validating
 
