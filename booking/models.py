@@ -15,6 +15,12 @@ STATUS = ((1, 'Confirmed'), (0, 'Not Confirmed'))
 EXPERIENCELIST = {}
 
 
+def validate_date(value):
+    today = datetime.date.today()
+    if value <= today:
+        raise ValidationError("Date cannot be today or in the past!")
+
+
 class Booking(models.Model):
     user_profile = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL, null=True, blank=True,
@@ -25,8 +31,6 @@ class Booking(models.Model):
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
-    booking_date = models.DateField(
-        validators=[validate_date], blank=True, null=True)
     booking_date = models.DateField(
         validators=[validate_date], blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -48,7 +52,7 @@ class Booking(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Overides the original save method to set the booking ref
+        Overides the original save method to set the booking ref 
         if it hasn't been set already
         """
 
@@ -74,7 +78,7 @@ class BookingItem(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Overrides the original save method to set the bookingitem total
+        Overrides the original save method to set the bookingitem total 
         and updates the booking total
         """
         self.bookingitem_total = Decimal(
@@ -82,5 +86,4 @@ class BookingItem(models.Model):
         super().save(*args, **kwargs)
 
         def __str__(self):
-            return f'Experience {self.experience.name} on booking \
-                 {self.bookings.booking_ref}'
+            return f'Experience {self.experience.name} on booking {self.bookings.booking_ref}'

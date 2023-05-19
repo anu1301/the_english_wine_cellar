@@ -198,7 +198,21 @@ The logo was created through Wix, keeping the image simple and using the same pa
 
 ## Features & Responsive Design
 
+
+
 ## Technologies
+-   HTML5 - HyperText Markup Language
+-   CSS - Cascading Style Sheets
+-   Python and JavaScript - programming languages
+-   Django framework
+-   Bootstrap 4 for inline styling
+-   ElephantSQL for postgreSQL database.
+-   Amazon Web Services (AWS) for static and media files
+-   Gitpod code editor
+-   Heroku hosting platform
+-   Balsamiq for the wireframes during planning proces
+-   Google fonts 
+-   GitHub - store project repository
 
 ## Marketing
 - SEO - keywords
