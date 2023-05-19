@@ -254,7 +254,6 @@ label:hover ~ input:checked ~ label {
 
 .allauth-form-inner-content input {
     border-color:#000;
-    border-radius: 5;
 
 }
 
@@ -347,7 +346,7 @@ label:hover ~ input:checked ~ label {
     }
   
     body {
-      height: calc(100vh- 116px);
+      height: calc(100vh - 150px);
     }
   
     .newsletter-form {
