@@ -36,7 +36,7 @@
                     </thead>
                     {% for item in booking_items %}
                     <tr>
-                        <td class="py-3 w-25">
+                        <td class="p-3 w-25">
                             {% if item.experience.image %}
                             <img class="img-fluid rounded" src="{{ item.experience.image.url }}"
                                 alt="{{ item.experience.name }}">
@@ -86,12 +86,12 @@
                     </tr>
                     {% endfor %}
                     <tr>
-                        <td colspan="6" class="pt-5 text-right">
+                        <td colspan="7" class="pt-5 text-right">
                             <h5><strong>Booking Total: £{{ booking_total|floatformat:2 }}</strong></h5>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="6" class="text-right">
+                        <td colspan="7" class="text-right">
                             <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 mt-3 btn-lg">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
@@ -123,11 +123,10 @@
                 </span>
                 <span>Why not browse our cellar</span>
             </a>
-
+            {% endif %}
         </div>
     </div>
 </div>
-{% endif %}
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
