@@ -127,7 +127,14 @@
             </div>
             {% else %}
             <p class="lead mb-5">Your basket is empty.</p>
-            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 btn-lg">
+            <a href="{% url 'experiences' %}" class="btn btn-outline-black rounded-5 mt-3 btn-lg">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span>Why not view the experiences on offer</span>
+            </a>
+            <br>
+            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-5 mt-3 btn-lg">
                 <span class="icon">
                     <i class="fas fa-chevron-left"></i>
                 </span>
