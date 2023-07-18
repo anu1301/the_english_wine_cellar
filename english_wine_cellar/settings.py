@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'profiles',
     'wine_tasting',
     'booking',
-    'wishlist',
     'reviews',
     'newsletter',
 
