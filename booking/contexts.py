@@ -9,7 +9,7 @@ def booking_contents(request):
     booking_items = []
     booking_total = 0
     experience_count = 0
-    
+
     booking = request.session.get('booking', {})
 
     for item_id, date_number_people in booking.items():

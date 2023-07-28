@@ -8,6 +8,7 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 from products.models import Product
+from wine_tasting.models import Experiences
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from bag.contexts import bag_contents
@@ -25,6 +26,7 @@ def cache_checkout_data(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
+            'booking': json.dumps(request.session.get('booking', {})),
             'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
@@ -41,6 +43,7 @@ def checkout(request):
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
+        booking = request.session.get('booking', {})
 
         form_data = {
             'full_name': request.POST['full_name'],
@@ -60,6 +63,7 @@ def checkout(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
+            order.original_booking = json.dumps(booking)
             order.save()
             for item_id, item_data in bag.items():
                 try:
@@ -184,6 +188,8 @@ def checkout_success(request, order_number):
 
     if 'bag' in request.session:
         del request.session['bag']
+    elif 'booking' in request.session:
+        del request.session['booking']
 
     template = 'checkout/checkout_success.html'
     context = {
