@@ -63,7 +63,6 @@ def checkout(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
-            order.original_booking = json.dumps(booking)
             order.save()
             for item_id, item_data in bag.items():
                 try:
@@ -91,6 +90,49 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
+
+            request.session['save_info'] = 'save-info' in request.POST
+            return redirect(reverse(
+                'checkout_success', args=[order.order_number]
+            ))
+        else:
+            messages.error(request, 'There was an error with your form. \
+                Please check your information again.')
+
+        order_form = OrderForm(form_data)
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_booking = json.dumps(booking)
+            order.save()
+
+            for item_id, item_data in booking.items():
+                try:
+                    experience = Experiences.objects.get(id=item_id)
+                    if isinstance(item_data, int):
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            experience=experience,
+                            quantity=item_data,
+                        )
+                        order_line_item.save()
+                    else:
+                        for quantity in item_data['quantity'].items():
+                            order_line_item = OrderLineItem(
+                                order=order,
+                                experience=experience,
+                                quantity=quantity,
+                            )
+                            order_line_item.save()
+                except Experiences.DoesNotExist:
+                    messages.error(request, (
+                        "One of the experiences in your booking wasn't found in our \
+                            database."
+                        "Please contact us for further assistance!")
+                    )
+                    order.delete()
+                    return redirect(reverse('view_booking'))
 
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse(
@@ -188,7 +230,8 @@ def checkout_success(request, order_number):
 
     if 'bag' in request.session:
         del request.session['bag']
-    elif 'booking' in request.session:
+
+    if 'booking' in request.session:
         del request.session['booking']
 
     template = 'checkout/checkout_success.html'
