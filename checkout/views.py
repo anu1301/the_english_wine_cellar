@@ -107,18 +107,18 @@ def checkout(request):
             order.original_booking = json.dumps(booking)
             order.save()
 
-            for item_id, item_data in booking.items():
+            for item_id, date_number_people in booking.items():
                 try:
                     experience = Experiences.objects.get(id=item_id)
-                    if isinstance(item_data, int):
+                    if isinstance(date_number_people, int):
                         order_line_item = OrderLineItem(
                             order=order,
                             experience=experience,
-                            quantity=item_data,
+                            quantity=date_number_people,
                         )
                         order_line_item.save()
                     else:
-                        for quantity in item_data['quantity'].items():
+                        for quantity in date_number_people['quantity'].items():
                             order_line_item = OrderLineItem(
                                 order=order,
                                 experience=experience,
@@ -155,7 +155,7 @@ def checkout(request):
         current_bag = bag_contents(request)
         current_experiences = booking_contents(request)
         total = current_bag['grand_total'] + \
-            current_experiences["booking_total"]
+            current_experiences['booking_total']
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
