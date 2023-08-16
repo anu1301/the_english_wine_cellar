@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 
 from .models import Product, Category
+from profiles.models import UserProfile
 from reviews.models import ReviewRating
 from checkout.models import OrderLineItem
 from .forms import ProductForm
@@ -79,7 +80,7 @@ def product_detail(request, product_id):
     )
     user_has_purchased = False
     for order in orders:
-        if order.order.user_profile.id == request.user.id:
+        if order.order.user_profile == request.user.id:
             user_has_purchased = True
 
     context = {

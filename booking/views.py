@@ -53,7 +53,6 @@ def adjust_booking(request, item_id):
 
     if quantity > 0:
         booking[item_id] = {'items_by_date': {date: quantity}}
-        # booking[item_id]['items_by_date'][date] = quantity
         messages.success(request, f'Updated {experience.name} in your booking')
     else:
         del booking[item_id]['items_by_date'][date]

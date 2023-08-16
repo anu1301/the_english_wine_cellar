@@ -5,6 +5,7 @@ from django.conf import settings
 
 from .models import Order, OrderLineItem
 from products.models import Product
+from wine_tasting.models import Experiences
 from profiles.models import UserProfile
 
 import stripe
@@ -53,6 +54,7 @@ class StripeWH_Handler:
         intent = event.data.object
         pid = intent.id
         bag = intent.metadata.bag
+        booking = intent.metadata.booking
         save_info = intent.metadata.save_info
 
         stripe_charge = stripe.Charge.retrieve(
@@ -99,6 +101,7 @@ class StripeWH_Handler:
                     county__iexact=shipping_details.address.state,
                     grand_total=grand_total,
                     original_bag=bag,
+                    original_booking=booking,
                     stripe_pid=pid,
                 )
                 order_exists = True
@@ -127,6 +130,7 @@ class StripeWH_Handler:
                     street_address2=shipping_details.address.line2,
                     county=shipping_details.address.state,
                     original_bag=bag,
+                    original_booking=booking,
                     stripe_pid=pid,
                 )
                 for item_id, item_data in json.loads(bag).items():
@@ -144,6 +148,24 @@ class StripeWH_Handler:
                                 order=order,
                                 product=product,
                                 quantity=quantity,
+                            )
+                            order_line_item.save()
+
+                for item_id, date_number_people in json.loads(booking).items():
+                    experience = Experiences.objects.get(pk=item_id)
+                    if isinstance(date_number_people, int):
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            experience=experience,
+                            quantity=date_number_people,
+                        )
+                        order_line_item.save()
+                    else:
+                        for quantity in date_number_people["items_by_date"].items():
+                            order_line_item = OrderLineItem(
+                                order=order,
+                                experience=experience,
+                                quantity=date_number_people,
                             )
                             order_line_item.save()
             except Exception as e:

@@ -1,8 +1,10 @@
+
 import uuid
 
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
+from decimal import Decimal
 
 from django_countries.fields import CountryField
 
@@ -33,6 +35,7 @@ class Order(models.Model):
     grand_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0)
     original_bag = models.TextField(null=False, blank=False, default='')
+    original_booking = models.TextField(null=False, blank=False, default='')
     stripe_pid = models.CharField(
         max_length=254, null=False, blank=False, default='')
 
@@ -80,14 +83,50 @@ class OrderLineItem(models.Model):
     lineitem_total = models.DecimalField(
         max_digits=6, decimal_places=2, null=False, blank=False, editable=False
         )
+    price = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False,)
+
+    def get_price(self, *args, **kwargs):
+        if self.product and self.experience:
+            print("combo price")
+            return self.product.price + self.experience.price
+        elif self.product:
+            print('product price')
+            return self.product.price
+        elif self.experience:
+            print('exp price')
+            return self.experience.price
 
     def save(self, *args, **kwargs):
         """
-        Overrides the original save method to set the lineutem total
+        Overrides the original save method to set the lineitem total
         and updates the order total
         """
-        self.lineitem_total = self.product.price * self.quantity
+        print('price: ', self.price)
+        print('quantity: ', self.quantity)
+        # def price(self):
+        #     if self.product and self.experience in self.order:
+        #         return self.product.price + self.experience.price
+        #         print("combo price")
+        #     elif self.product in self.order:
+        #         return self.product.price
+        #         print('product price')
+        #     elif self.experience in self.order:
+        #         return self.experience.price
+        #         print('exp price')
+
+        self.price = self.get_price()
+        self.lineitem_total = int(self.price) * self.quantity
+
+        # self.lineitem_total = self.product.price * self.quantity
+        
+        print("I'm saving")
         super().save(*args, **kwargs)
 
     def __str__(self):
+        if self.product is None:
+            return 'None'
+
+        if self.experience is None:
+            return 'None'
+
         return f'SKU {self.product.sku} on order {self.order.order_number}'
