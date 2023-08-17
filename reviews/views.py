@@ -28,6 +28,6 @@ def submit_review(request, product_id):
                 data.save()
                 messages.success(
                     request,
-                    'Your feedback, it has successfully been submitted.'
+                    'Your feedback has successfully been submitted.'
                     )
                 return HttpResponseRedirect(request.META["HTTP_REFERER"])
