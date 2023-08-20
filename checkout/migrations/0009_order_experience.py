@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
         ('checkout', '0008_orderlineitem_price'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='order',
-            name='experience',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='wine_tasting.experiences'),
-        ),
-    ]
+    # operations = [
+    #     migrations.AddField(
+    #         model_name='order',
+    #         name='experience',
+    #         field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='wine_tasting.experiences'),
+    #     ),
+    # ]

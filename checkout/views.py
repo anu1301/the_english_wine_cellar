@@ -101,6 +101,7 @@ def checkout(request):
             #     'checkout_success', args=[order.order_number]
             # ))
 
+            order = order_form.save(commit=False)
             if len(booking.items()):
                 print("items are in the booking session context")
                 print('booking', booking.items)
@@ -145,52 +146,6 @@ def checkout(request):
         else:
             messages.error(request, 'There was an error with your form. \
                 Please check your information again.')
-
-        # order_form = OrderForm(form_data)
-        # if order_form.is_valid():
-        #     order = order_form.save(commit=False)
-        #     pid = request.POST.get('client_secret').split('_secret')[0]
-        #     order.stripe_pid = pid
-        #     order.original_booking = json.dumps(booking)
-        #     order.save()
-
-            # if len(booking.items()):
-            #     print("items are in the booking session context")
-
-            # for item_id, date_number_people in booking.items():
-            #     try:
-            #         experience = Experiences.objects.get(pk=item_id)
-            #         if isinstance(date_number_people, int):
-            #             order_line_item = OrderLineItem(
-            #                 order=order,
-            #                 experience=experience,
-            #                 quantity=num_people,
-            #             )
-            #             order_line_item.save()
-            #         else:
-            #             for date_val in date_number_people["items_by_date"].items():
-            #                 order_line_item = OrderLineItem(
-            #                     order=order,
-            #                     experience=experience,
-            #                     quantity=date_number_people,
-            #                 )
-            #                 order_line_item.save()
-            #     except Experiences.DoesNotExist:
-            #         messages.error(request, (
-            #             "One of the experiences in your booking wasn't found \
-            #                 in our database."
-            #             "Please contact us for further assistance!")
-            #         )
-            #         order.delete()
-            #         return redirect(reverse('view_booking'))
-
-            request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse(
-                'checkout_success', args=[order.order_number]
-            ))
-        # else:
-        #     messages.error(request, 'There was an error with your form. \
-        #         Please check your information again.')
 
     # For any other request that is not a post
     else:

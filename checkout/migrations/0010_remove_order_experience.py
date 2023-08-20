@@ -9,9 +9,9 @@ class Migration(migrations.Migration):
         ('checkout', '0009_order_experience'),
     ]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='order',
-            name='experience',
-        ),
-    ]
+    # operations = [
+    #     migrations.RemoveField(
+    #         model_name='order',
+    #         name='experience',
+    #     ),
+    # ]
