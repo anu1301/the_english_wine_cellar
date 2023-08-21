@@ -228,6 +228,11 @@ Contains links to social media sites, along with links to login, register, drink
 
 ![checkout_summary](documentation_assets/images/checkout_summary.PNG)
 
+- Following the successful completion of the order, the customer will receive a confirmation notice of their order.
+
+![order_confirmation](documentation_assets/images/order_confirmaton.PNG)
+
+
 
 ## Technologies
 -   HTML5 - HyperText Markup Language
@@ -281,7 +286,8 @@ Due to the coverage of Facebook, this would be a lucrative marketing and adverti
 
 ### Manual Testing
 
-The site has been tested on smaller devices (Iphone SE being the smallest) in devtools. 
+The site has been tested on smaller devices (Iphone SE being the smallest) in devtools.
+
 
 - When products/experiences are added to the basket/booking, the product basket does not render properly on small devices, and will require refactoring. Also the product management form does not render properly.
 
