@@ -1,0 +1,26 @@
+<form class="form update-form" action="{% url 'adjust_booking' item.item_id %}" method="POST">
+    {% csrf_token %}
+    <td class="py-3 w-25">
+        <div class="form-group">
+            <!-- Input group containing quantity input -->
+            <div class="input-group input-group-{{ item.item_id }}">
+                <input class="form-control num_input border-black" type="number" name="quantity"
+                    value="{{ item.quantity }}" min="1" max="10"
+                    data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+            </div>
+        </div>
+    </td>
+    <td class="py-3 w-25">
+        <div class="form-group">
+            <!-- Input group containing date input  -->
+            <div class="input-group input-group-{{ item.item_id }}">
+                <input class="form-control date_input border-black" type="date" name="date"
+                    value="{{ item.date }}" data-item_id="{{ item.item_id }}"
+                    id="id_date_{{ item.item_id }}">
+            </div>
+            <a class="update-link text-info"><strong>Update</strong></a>
+            <a class="remove-item text-danger float-right"
+                id="remove_{{ item.item_id }}"><strong>Remove</strong></a>
+        </div>
+    </td>
+</form>

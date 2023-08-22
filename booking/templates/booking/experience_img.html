@@ -1,0 +1,10 @@
+{% if item.experience.image %}
+<img class="img-fluid rounded" src="{{ item.experience.image.url }}"
+    alt="{{ item.experience.name }}">
+{% elif item.experience.image_url %}
+<img class="img-fluid rounded" src="{{ item.experience.image_url }}"
+    alt="{{ item.experience.name }}">
+{% else %}
+<img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png"
+    alt="{{ item.experience.name }}">
+{% endif %}

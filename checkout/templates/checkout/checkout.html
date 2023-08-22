@@ -15,10 +15,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container">
     <div class="row">
         <div class="col">
-            <hr class="mt-5">
+            <hr class="mt-2">
             <h2 class="logo-font mb-4">Checkout</h2>
             <hr>
         </div>
@@ -26,7 +26,7 @@
     <div class="row">
         <!-- Order summary information -->
         <div class="col-12 col-lg-6 order-lg-last mb-5">
-            <p class="text-muted">Your Order Summary ({{ product_count }})</p>
+            <p class="text-muted">Your Order Summary ({{ product_count|add:experience_count }})</p>
             <div class="row">
                 <div class="col-7 offset-2">
                     <p class="mb-1 mt-0 small text-muted">Item</p>
