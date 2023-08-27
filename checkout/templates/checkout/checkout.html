@@ -83,13 +83,13 @@
             <div class="row text-black text-right">
                 <div class="col-7 offset-2">
                     <p class="my-0">Order Total:</p>
-                    <p class="my-0">Delivery:</p>
+                    <p class="my-0">Delivery/Admin:</p>
                     <p class="my-0">Grand Total:</p>
                 </div>
                 <div class="col-3">
                     <p class="my-0">£{{ total|add:booking_total | floatformat:2 }}</p>
-                    <p class="my-0">£{{ delivery | floatformat:2 }}</p>
-                    <p class="my-0"><strong>£{{ grand_total|add:booking_total | floatformat:2 }}</strong></p>
+                    <p class="my-0">£{{ delivery|add:admin | floatformat:2 }}</p>
+                    <p class="my-0"><strong>£{{ grand_total|add:final_total | floatformat:2 }}</strong></p>
                 </div>
             </div>
 
@@ -153,7 +153,7 @@
                         </span>
                         <span class="font-weight-bold">Adjust Booking</span>
                     </a>
-                    <button id="submit-button" class="btn btn-black rounded-5">
+                    <button id="submit-button" class="btn btn-black rounded-5 mt-1">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>
@@ -163,7 +163,7 @@
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>
                         </span>
-                        <span>Your card will be charged <strong>£{{ grand_total|add:booking_total|floatformat:2 }}</strong></span>
+                        <span>Your card will be charged <strong>£{{ grand_total|add:final_total|floatformat:2 }}</strong></span>
                     </p>
                 </div>
 

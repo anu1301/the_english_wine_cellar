@@ -35,10 +35,23 @@ def booking_contents(request):
             })
             print('booking', booking_items)
 
+    if booking_total < settings.FREE_DELIVERY_THRESHOLD:
+        admin = booking_total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
+        free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - booking_total
+    else:
+        admin = 0
+        free_delivery_delta = 0
+
+    final_total = admin + booking_total
+
     context = {
         'booking_items': booking_items,
         'booking_total': booking_total,
         'experience_count': experience_count,
+        'admin': admin,
+        'free_delivery_delta': free_delivery_delta,
+        'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
+        'final_total': final_total,
     }
 
     return context
