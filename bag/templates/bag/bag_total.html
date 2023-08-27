@@ -4,7 +4,7 @@
 {% if free_delivery_delta > 0 %}
 <p class="mb-1 text-danger">
     <strong>
-        You could get free delivery by spending just £{{ free_delivery_delta }}
+        You could get free delivery/admin charges by spending just £{{ free_delivery_delta|add:free_admin_delta|add:"-150" }}
         more!
     </strong>
 </p>
