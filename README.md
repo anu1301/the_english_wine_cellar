@@ -288,13 +288,11 @@ Due to the coverage of Facebook, this would be a lucrative marketing and adverti
 
 The site has been tested on smaller devices (Iphone SE being the smallest) in devtools.
 
-- When products/experiences are added to the basket/booking, the product basket does not render properly on small devices, and will require refactoring. Also the product management form does not render properly.
-
 - The newsletter works and renders properly on all devices.
 
 - The search bar only searches for products, but does not find any wine tasting experiences.
 
-- Known bug in the booking sessions; when multiples of the same product with different dates is update or removed it removes the item by id regardless of the date.
+- Known bug in the booking sessions; when multiples of the same product with different dates is updated or removed it removes the item by id regardless of the date.
 
 
 ## Deployment

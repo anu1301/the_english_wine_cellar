@@ -96,11 +96,6 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_bag'))
 
-            # request.session['save_info'] = 'save-info' in request.POST
-            # return redirect(reverse(
-            #     'checkout_success', args=[order.order_number]
-            # ))
-
             order = order_form.save(commit=False)
             if len(booking.items()):
                 print("items are in the booking session context")
@@ -109,7 +104,7 @@ def checkout(request):
             for item_id, date_number_people in booking.items():
                 print('item_id', item_id)
                 print('date_number_people', date_number_people)
-               
+
                 try:
                     experience = Experiences.objects.get(pk=item_id)
                     if isinstance(date_number_people, int):
@@ -137,7 +132,7 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('view_booking'))
-                
+
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse(
                 'checkout_success', args=[order.order_number]
