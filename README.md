@@ -288,6 +288,12 @@ Due to the coverage of Facebook, this would be a lucrative marketing and adverti
 
 The site has been tested on smaller devices (Iphone SE being the smallest) in devtools.
 
+Tested in:
+
+- Firefox
+- Chrome
+- Microsoft Edge
+
 ### Navigation
 
 All Pages:
