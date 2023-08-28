@@ -303,6 +303,12 @@ Basket/Booking | Upon clicking the "Basket" of "Wine Glass" icon in the navigati
 Search Bar | When searching for a keyword, the results will show products that contain the keyword in the product name or description. This does not apply to searching wine tasting experiences as there are very small number of experiences on offer and do not require a search facility.| PASS
 Product/Wine Tasting Experience Detail | Upon clicking on either the product image within the product page or the experience on the wine tasting page, the user will be directed to the detail page giving extensive detail about the product or experience.| PASS
 
+### Home page
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Media | All media is displayed properly and have no pixelation/stretched images, and are responsive on all devices. | PASS
+Responsiveness | All elements on the page have been checked for consistency and scalability in mobile, tablet and desktop view.| PASS
+
 
 
 
