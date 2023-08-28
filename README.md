@@ -357,12 +357,26 @@ Responsiveness | All elements on the page have been checked for consistency and 
 Adding a Product | User has to be signed in as a super user/administrator. Upon completing the form to add a new product, the relevant category is selected and is searchable via the search bar. | PASS
 Uploading an Image | Upon uploading an image to a new product, the product details page shows the correct image.| PASS
 
+### Footer
 
+All Pages:
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Subscribe to Newsletter | Upon entering user email in the newsletter form in the footer, the browser redirects the user to the home page, with a success message thanking the user for signing up.| PASS
+Unsubscribe to Newsletter | Upon clicking the "Unsubscribe" link in the footer, the browser redirects the user to the newsletter unsubscribe page, where the user has to enter their email, which is then followed by a success message. The user will be aware that they are on this page from the page heading. | PASS
+Register/Login | Upon clicking the "Register" or "Login" link in the footer, the browser redirects the user to the register/login pages. The user will be aware that they are on these pages by the page headings.| PASS
+Social Media | Upon clicking the social media icons directs the user to the respective socila media websites in a new tab.| PASS
+Drinkaware/WineGB | Upon clicking the Drink Aware/WineGB links directs the user in a new tab to the relevant website. | PASS
 
+### Issues/Bugs
 
+- Known bug in the booking sessions; when multiples of the same experience with different dates is updated or removed it removes the item by id regardless of the date/quantity.
 
-- Known bug in the booking sessions; when multiples of the same product with different dates is updated or removed it removes the item by id regardless of the date.
+- The free delivery/admin deltas has not been utilised within the bag/booking and checkout areas as they would need to be combined to provide a realistic ordering/buying experience.
 
+- Realistically, there would not be a charge for the experiences - however in this case the code logic has been difficult to write successfully. It is beyond my experience.
+
+- Following a successful checking-out process, a confirmation email is not sent out, even though this has been added to the webhook handler and email set-up has been put in place.
 
 ## Deployment
 
