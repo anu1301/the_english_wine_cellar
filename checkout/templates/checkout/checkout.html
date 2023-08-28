@@ -87,17 +87,19 @@
                 <div class="col-3">
                     <p class="my-1">£{{ total|add:booking_total | floatformat:2 }}</p>
                 </div>
-                <p class="small text-danger my-5">
+                
+            </div>
+            <div>
+                <p class="small text-danger text-center my-5">
                     <span class="icon">
                         <i class="fas fa-exclamation-circle"></i>
                     </span>
-                    <span>
+                    <span class="d-block-sm pd-3">
                         <strong>Please note for all orders below £150.00 a 10% delivery/administration charge will be applied to the order total 
                         upon completion of the purchasing process.</strong>
                     </span>
                 </p>
             </div>
-
         </div>
         <!-- Delivery and payment information form -->
         <div class="col-12 col-lg-6">
