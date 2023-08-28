@@ -288,9 +288,23 @@ Due to the coverage of Facebook, this would be a lucrative marketing and adverti
 
 The site has been tested on smaller devices (Iphone SE being the smallest) in devtools.
 
-- The newsletter works and renders properly on all devices.
+### Navigation
 
-- The search bar only searches for products, but does not find any wine tasting experiences.
+All Pages:
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Home | Upon clicking the "Home" link in the navigation bar or on the business logo, the browser redirects the user to the home page. | PASS
+Navigation Links Within the Home Page | Upon clicking the "Browse Our Cellar" link, the browser directs the user to the Products page. Upon clicking on the smaller image links below the main "Hero" image directs the user to the respective filtered pages of the products, and the wine tasting experience page. | PASS
+All Products | Upon clicking the "All Products" link in the navigation bar, a dropdown menu is revealed giving access to the user to sort/filter options, as well as a link to the "All Products" page. The user will be aware that they are on this page by the page heading. The various filters when clicked on will filter the products according to category filter, and can be seen how they have been filtered on the products page.| PASS
+Wine, Glassware & Specials filters| Upon clicking the catgory filters in the navigation bar, dropdown menus are revealed for those particular products - each filter provides categories which sort the products accordingly.| PASS
+Wine Tasting | Upon clicking the "Wine Tasting" link in the navigation bar, the browser directs the user to the wine tasting experiences page. The user will be aware that they are on this page by the page heading. | PASS
+My Account | Upon clicking on "My Account", a dropdown menu is presented with links to "Register" and "Login" in the navigation bar (if not logged-in). If logged-in a "Logout" and "My Profile" links are also presented, (if superuser/administrator - then an "Add Product" link is presented as well). In all cases the browser redirects the user to the respective pages. The user will be aware of the pages they are on as they all have page headings. | PASS
+Basket/Booking | Upon clicking the "Basket" of "Wine Glass" icon in the navigation bar, the browser redirects the user to the basket or booking page accordingly. The user will be aware of  the pages they are on as the pages have the appropriate headings. | PASS
+Search Bar | When searching for a keyword, the results will show products that contain the keyword in the product name or description. This does not apply to searching wine tasting experiences as there are very small number of experiences on offer and do not require a search facility.| PASS
+Product/Wine Tasting Experience Detail | Upon clicking on either the product image within the product page or the experience on the wine tasting page, the user will be directed to the detail page giving extensive detail about the product or experience.| PASS
+
+
+
 
 - Known bug in the booking sessions; when multiples of the same product with different dates is updated or removed it removes the item by id regardless of the date.
 
