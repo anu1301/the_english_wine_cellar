@@ -312,10 +312,27 @@ Responsiveness | All elements on the page have been checked for consistency and 
 ### Products/Wine Tasting Pages
 TEST            | OUTCOME                          | PASS / FAIL  
 --------------- | -------------------------------- | ---------------
-pixelation/stretched images, and are responsive on all devices. | PASS
+Media | All media is displayed properly and have no pixelation/stretched images, and are responsive on all devices. | PASS
 Responsiveness | All elements on the page have been checked for consistency and scalability in mobile, tablet and desktop view.| PASS
-Sort filter | The sort/filter functionality, for products only, has been checked by selecting each option - eEach time the page reloads and sorts the products accordingly. | PASS
+Sort filter | The sort/filter functionality, for products only, has been checked by selecting each option - each time the page reloads and sorts the products accordingly. | PASS
 Edit/Delete Button (only applies to products and for super user/administrator only) | The edit/delete button is only accessible if the user is logged in as a super user/administrator. | PASS
+
+### Products/Wine Tasting Experience Detail Pages
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Media | All media is displayed properly and have no pixelation/stretched images, and are responsive on all devices. | PASS
+Responsiveness | All elements on the page have been checked for consistency and scalability in mobile, tablet and desktop view.| PASS
+Date Selector | The date selector (only applicable to wine tasting experiences) prevents dates in the past being selected and the functionality has been tested by selecting a date which displays correctly. It displays correctly when added to the booking. | PASS
+Quantity Selectors | The quantity selector functionality for the product has plus/minus buttons and have been tested by clicking either to increase/decrease quantities. It displays correctly when added to the basket. The quantity selector, denoting the number of persons the booking is for, for the wine tasting experience is an up/down toggle to increase/decrease quantities. It displays correctly when added to booking. Both have the minimum quantity of one.| PASS
+Product Reviews | Product review is only applicable to products and are found on the product detail page. To select star rating and to write a review the user needs to pass two criteria - to be logged-in and to have purchased the product. The functionality for selecting star rating/writing a review has been tested by logging-in and purchasing a product. Users who have not signed-in are informed that they need to be signed in before they can write a review. Users who have signed-in but have not purchased the product before are informed that they can only submit a review if they have purchased the product. | PASS
+### Shopping Bag/Booking Pages
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Media | All media is displayed properly and have no pixelation/stretched images, and are responsive on all devices. | PASS
+Responsiveness | All elements on the page have been checked for consistency and scalability in mobile, tablet and desktop view.| PASS
+Remove Item from Bag/Booking | Clicking the remove link on an item removes the item from the bag/booking.| PASS
+Quantity Selector | Check the quantity selector functionality by selecting minus and plus buttons for product and up/down toggle for booking - and then update. Adding a product/experience to the basket/booking to confirm the quantity selected is correct. | PASS
+
 
 
 
