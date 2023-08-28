@@ -350,6 +350,12 @@ Responsiveness | All elements on the page have been checked for consistency and 
 Order History | Upon clicking on an order number in the order history section of user's profile, this takes the user to a past order confirmation summary page. | PASS
 Updating Profile | Updating the default delivery information in profile reflects the changes on the checkout page. | PASS
 
+### Product Management (Add Product) Page
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Responsiveness | All elements on the page have been checked for consistency and scalability in mobile, tablet and desktop view.| PASS
+Adding a Product | User has to be signed in as a super user/administrator. Upon completing the form to add a new product, the relevant category is selected and is searchable via the search bar. | PASS
+Uploading an Image | Upon uploading an image to a new product, the product details page shows the correct image.| PASS
 
 
 
