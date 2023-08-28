@@ -333,6 +333,22 @@ Responsiveness | All elements on the page have been checked for consistency and 
 Remove Item from Bag/Booking | Clicking the remove link on an item removes the item from the bag/booking.| PASS
 Quantity Selector | Check the quantity selector functionality by selecting minus and plus buttons for product and up/down toggle for booking - and then update. Adding a product/experience to the basket/booking to confirm the quantity selected is correct. | PASS
 
+### Checkout page
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Media | All media is displayed properly and have no pixelation/stretched images, and are responsive on all devices. | PASS
+Responsiveness | All elements on the page have been checked for consistency and scalability in mobile, tablet and desktop view.| PASS
+Checkout form | Filling in the form with the correct validation processes the order. | PASS
+Checkout form | Filling in the form with the incorrect validation shows errors messages. | PASS
+Save details checkout | Selecting the "Save this delivery information to my profile" checkbox, this saves/updates my profile details. | PASS
+Card authentication | Stripe test card details used incorrectly to fail and to check for error messages. | PASS
+
+### Checkout success page
+TEST            | OUTCOME                          | PASS / FAIL  
+--------------- | -------------------------------- | ---------------
+Responsiveness | All elements on the page have been checked for consistency and scalability in mobile, tablet and desktop view.| PASS
+Order History | Upon clicking on an order number in the order history section of user's profile, this takes the user to a past order confirmation summary page. | PASS
+Updating Profile | Updating the default delivery information in profile reflects the changes on the checkout page. | PASS
 
 
 
